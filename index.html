@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FLYWHEEL.md — how agents ship</title>
+<meta name="description" content="The operating manual for autonomous agents that ship and improve real software. Ship → verify → learn → improve — faster every loop. The third file in the agent canon." />
+<meta property="og:title" content="FLYWHEEL.md — how agents ship" />
+<meta property="og:description" content="AGENTS.md says what to do. SOUL.md says who to be. FLYWHEEL.md says how to ship — and how to know you did." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0c; --bg2:#101012; --surface:#141417; --surface2:#191a1e;
+    --line:rgba(236,236,230,0.10); --line2:rgba(236,236,230,0.20);
+    --ink:#ECECE4; --muted:#9b9b90; --faint:#6a6a60;
+    --amber:#FF6A1A; --amber-soft:#FFAE73; --ember:#ff3a17;
+    --glow:rgba(255,106,26,0.45);
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Hanken Grotesk",sans-serif; font-weight:400;
+    line-height:1.5; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* grain + atmosphere */
+  body::before{
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(900px 600px at 78% -8%, rgba(255,106,26,0.13), transparent 60%),
+      radial-gradient(700px 500px at 0% 100%, rgba(255,58,23,0.06), transparent 55%);
+  }
+  body::after{
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px; position:relative; z-index:2}
+  a{color:inherit; text-decoration:none}
+  .mono{font-family:"JetBrains Mono",monospace}
+  .kick{
+    font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:0.34em;
+    text-transform:uppercase; color:var(--amber); font-weight:500;
+  }
+  .display{font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase; line-height:0.92; letter-spacing:0.005em}
+
+  /* ---- header ---- */
+  header{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:saturate(140%) blur(10px);
+    background:linear-gradient(to bottom, rgba(11,11,12,0.92), rgba(11,11,12,0.55));
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+  .brand{display:flex; align-items:center; gap:11px; font-family:"JetBrains Mono",monospace; font-weight:700; letter-spacing:-0.01em; font-size:16px}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--amber);box-shadow:0 0 14px var(--glow); animation:throb 2.6s ease-in-out infinite}
+  @keyframes throb{50%{box-shadow:0 0 22px var(--glow), 0 0 4px var(--amber)}}
+  .brand b{color:var(--ink)} .brand .md{color:var(--faint)}
+  .navlinks{display:flex; gap:30px; align-items:center}
+  .navlinks a{font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--muted); transition:color .2s}
+  .navlinks a:hover{color:var(--ink)}
+  .navlinks .ghbtn{color:var(--ink); border:1px solid var(--line2); padding:8px 15px; border-radius:2px; transition:.2s}
+  .navlinks .ghbtn:hover{border-color:var(--amber); color:var(--amber)}
+  @media(max-width:760px){.navlinks a:not(.ghbtn){display:none}}
+
+  /* ---- hero ---- */
+  .hero{position:relative; padding:clamp(56px,11vw,128px) 0 clamp(60px,9vw,108px)}
+  .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr; gap:8px}}
+  .h1{font-size:clamp(54px,9vw,116px); margin:18px 0 0; letter-spacing:0.004em}
+  .h1 .l2{color:var(--amber); display:block; text-shadow:0 0 38px rgba(255,106,26,0.28)}
+  .lede{margin-top:26px; max-width:540px; font-size:clamp(17px,2vw,20px); color:var(--muted); line-height:1.6}
+  .lede b{color:var(--ink); font-weight:600}
+  .canon{margin-top:22px; font-family:"JetBrains Mono",monospace; font-size:13.5px; color:var(--faint); line-height:1.9}
+  .canon b{color:var(--ink)} .canon .you{color:var(--amber)}
+  .cta-row{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap}
+  .btn{font-family:"JetBrains Mono",monospace; font-weight:500; font-size:14px; padding:14px 22px; border-radius:2px; display:inline-flex; align-items:center; gap:9px; transition:.2s; border:1px solid transparent}
+  .btn-primary{background:var(--amber); color:#180a02; font-weight:700}
+  .btn-primary:hover{box-shadow:0 0 0 4px var(--glow); transform:translateY(-1px)}
+  .btn-ghost{border-color:var(--line2); color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--ink); transform:translateY(-1px)}
+  .btn .arr{transition:transform .2s} .btn:hover .arr{transform:translateX(3px)}
+
+  /* ---- flywheel visual ---- */
+  .wheelbox{position:relative; aspect-ratio:1; width:100%; max-width:440px; margin:0 auto; display:grid; place-items:center}
+  @media(max-width:900px){.wheelbox{max-width:330px; margin-top:30px}}
+  #flywheel{width:72%; height:72%; overflow:visible; filter:drop-shadow(0 0 26px rgba(255,106,26,0.22))}
+  #flywheel .rim{fill:none; stroke:var(--ink); stroke-width:2.4; opacity:.85}
+  #flywheel .rim2{fill:none; stroke:var(--line2); stroke-width:14}
+  #flywheel .spoke{stroke:var(--ink); stroke-width:5; stroke-linecap:round; opacity:.92}
+  #flywheel .spoke.a{stroke:var(--amber)}
+  #flywheel .bolt{fill:var(--amber)}
+  #flywheel .hub{fill:var(--bg2); stroke:var(--amber); stroke-width:3}
+  #flywheel .hubdot{fill:var(--amber)}
+  #flywheel .tooth{stroke:var(--faint); stroke-width:2}
+  .pulse{position:absolute; width:13px; height:13px; border-radius:50%; background:var(--amber); box-shadow:0 0 16px var(--glow), 0 0 4px #fff; offset-path:circle(33% at 50% 50%); animation:travel 4.2s linear infinite}
+  @keyframes travel{to{offset-distance:100%}}
+  .stage{position:absolute; font-family:"JetBrains Mono",monospace; font-size:12.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); font-weight:500; white-space:nowrap}
+  .stage span{color:var(--faint); display:block; font-size:10.5px; letter-spacing:.04em; margin-top:2px}
+  .stage.s1{top:0; left:50%; transform:translateX(-50%); text-align:center}
+  .stage.s2{right:0; top:50%; transform:translateY(-50%); text-align:right}
+  .stage.s3{bottom:0; left:50%; transform:translateX(-50%); text-align:center}
+  .stage.s4{left:0; top:50%; transform:translateY(-50%); text-align:left}
+  .stage .n{color:var(--amber)}
+
+  /* ---- generic section ---- */
+  section{position:relative; z-index:2; padding:clamp(64px,10vw,116px) 0; border-top:1px solid var(--line)}
+  .seclabel{display:flex; align-items:baseline; gap:16px; margin-bottom:34px}
+  .seclabel .num{font-family:"JetBrains Mono",monospace; color:var(--amber); font-size:13px; letter-spacing:.2em}
+  .seclabel .ttl{font-family:"JetBrains Mono",monospace; font-size:13px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted)}
+  .seclabel::after{content:""; flex:1; height:1px; background:var(--line); align-self:center}
+  .bighead{font-size:clamp(34px,5.4vw,68px); max-width:16ch}
+  .bighead .am{color:var(--amber)}
+
+  /* problem */
+  .problem p{max-width:62ch; font-size:clamp(17px,1.7vw,20px); color:var(--muted); margin-top:24px; line-height:1.62}
+  .problem p b{color:var(--ink); font-weight:600}
+  .pullq{margin-top:42px; padding:28px 32px; border-left:3px solid var(--amber); background:linear-gradient(90deg, rgba(255,106,26,0.06), transparent); font-size:clamp(20px,2.6vw,30px); font-weight:600; line-height:1.32; max-width:24ch}
+  .pullq .am{color:var(--amber)}
+
+  /* the loop — stage cards */
+  .loopgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
+  @media(max-width:880px){.loopgrid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.loopgrid{grid-template-columns:1fr}}
+  .lcard{border:1px solid var(--line); background:var(--surface); padding:24px 22px 26px; border-radius:3px; position:relative; overflow:hidden; transition:.25s}
+  .lcard:hover{border-color:var(--line2); transform:translateY(-3px)}
+  .lcard::before{content:""; position:absolute; left:0; top:0; height:3px; width:100%; background:linear-gradient(90deg,var(--amber),transparent); transform:scaleX(0); transform-origin:left; transition:transform .3s}
+  .lcard:hover::before{transform:scaleX(1)}
+  .lcard .ln{font-family:"JetBrains Mono",monospace; color:var(--amber); font-size:13px; letter-spacing:.1em}
+  .lcard h3{font-family:"Anton",sans-serif; text-transform:uppercase; font-weight:400; font-size:30px; letter-spacing:.02em; margin:14px 0 10px}
+  .lcard p{color:var(--muted); font-size:14.5px; line-height:1.55}
+  .loopnote{margin-top:22px; font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--faint)}
+  .loopnote .am{color:var(--amber)}
+
+  /* the bar — principles */
+  .bar{counter-reset:bar}
+  .prow{display:grid; grid-template-columns:84px 1.1fr 1.4fr; gap:24px; align-items:start; padding:28px 0; border-top:1px solid var(--line)}
+  .prow:last-child{border-bottom:1px solid var(--line)}
+  @media(max-width:780px){.prow{grid-template-columns:1fr; gap:8px}}
+  .prow .pn{font-family:"JetBrains Mono",monospace; color:var(--faint); font-size:14px; padding-top:6px}
+  .prow h4{font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase; font-size:clamp(22px,2.5vw,30px); line-height:1.04; letter-spacing:.01em}
+  .prow .ps{color:var(--muted); font-size:16px; line-height:1.55; align-self:center}
+  .prow .ps b{color:var(--amber-soft); font-weight:600}
+  .prow:hover h4{color:var(--amber)}
+
+  /* it's just a file */
+  .filewrap{display:grid; grid-template-columns:1fr 1fr; gap:30px; align-items:start}
+  @media(max-width:860px){.filewrap{grid-template-columns:1fr}}
+  .codecard{background:#0e0e10; border:1px solid var(--line2); border-radius:5px; overflow:hidden; box-shadow:0 30px 60px -30px rgba(0,0,0,0.8)}
+  .codebar{display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid var(--line); background:var(--surface)}
+  .codebar i{width:11px;height:11px;border-radius:50%;display:inline-block;background:#2a2a2e}
+  .codebar i.r{background:var(--ember)} .codebar .fn{margin-left:8px; font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--faint)}
+  .code{padding:20px 22px; font-family:"JetBrains Mono",monospace; font-size:13.5px; line-height:1.85; color:#cfcfc6; overflow-x:auto}
+  .code .c{color:var(--faint)} .code .am{color:var(--amber)} .code .k{color:#7fd1c4} .code .you{color:var(--amber); font-weight:700}
+  .filewrap h3{font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase; font-size:clamp(28px,3.4vw,42px); line-height:1.02}
+  .filewrap p{color:var(--muted); margin-top:18px; font-size:17px; line-height:1.6; max-width:46ch}
+  .filewrap p b{color:var(--ink)}
+
+  /* clawmetry CTA */
+  .finale{border-top:1px solid var(--line); text-align:left; position:relative; overflow:hidden}
+  .finale::before{content:""; position:absolute; inset:0; background:radial-gradient(700px 380px at 80% 120%, rgba(255,106,26,0.16), transparent 60%); z-index:-1}
+  .finale .bighead{max-width:20ch}
+  .finale p{color:var(--muted); font-size:clamp(17px,1.9vw,21px); max-width:54ch; margin-top:24px; line-height:1.6}
+  .finale .punch{margin-top:30px; font-family:"Anton",sans-serif; text-transform:uppercase; font-size:clamp(20px,2.4vw,30px); letter-spacing:.01em}
+  .finale .punch .am{color:var(--amber)}
+
+  /* footer */
+  footer{border-top:1px solid var(--line); padding:46px 0 60px; position:relative; z-index:2}
+  .foot{display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; align-items:center}
+  .foot .mono{font-size:13px; color:var(--faint)}
+  .foot a{color:var(--muted); font-family:"JetBrains Mono",monospace; font-size:13px; margin-left:22px; transition:.2s}
+  .foot a:hover{color:var(--amber)}
+
+  /* reveal */
+  .rv{opacity:0; transform:translateY(22px); transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1; transform:none}
+  .hero .rv{transition-duration:.9s}
+  @media(prefers-reduced-motion:reduce){
+    .rv{opacity:1!important; transform:none!important; transition:none}
+    .pulse,.brand .dot{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top"><span class="dot"></span><b>FLYWHEEL</b><span class="md">.md</span></a>
+    <nav class="navlinks">
+      <a href="#problem">Why</a>
+      <a href="#loop">The loop</a>
+      <a href="#bar">The bar</a>
+      <a href="#file">Get it</a>
+      <a class="ghbtn" href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+<div class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <div class="kick rv">The third file in the agent canon</div>
+      <h1 class="h1 display rv">The flywheel<span class="l2">is the product.</span></h1>
+      <p class="lede rv"><b>FLYWHEEL.md</b> is the operating manual for autonomous agents that ship and compound improvements to real software. Ship → verify → learn → improve — and the wheel spins faster every loop.</p>
+      <div class="canon rv">
+        <b>AGENTS.md</b> says what to do.<br>
+        <b>SOUL.md</b> says who to be.<br>
+        <b>FLYWHEEL.md</b> says how to ship <span class="you">— and how to know you did.</span>
+      </div>
+      <div class="cta-row rv">
+        <a class="btn btn-primary" href="#bar">Read the manifesto <span class="arr">→</span></a>
+        <a class="btn btn-ghost" href="https://github.com/" target="_blank" rel="noopener">Fork on GitHub <span class="arr">↗</span></a>
+      </div>
+    </div>
+
+    <div class="rv">
+      <div class="wheelbox">
+        <svg id="flywheel" viewBox="-110 -110 220 220" aria-hidden="true">
+          <g id="wheelspin">
+            <circle class="rim2" r="92"></circle>
+            <circle class="rim" r="99"></circle>
+            <circle class="rim" r="84"></circle>
+            <!-- teeth -->
+            <g class="teeth"></g>
+            <!-- spokes -->
+            <line class="spoke a" x1="0" y1="0" x2="0" y2="-84"></line>
+            <line class="spoke" x1="0" y1="0" x2="73" y2="42"></line>
+            <line class="spoke" x1="0" y1="0" x2="-73" y2="42"></line>
+            <line class="spoke" x1="0" y1="0" x2="0" y2="84"></line>
+            <line class="spoke" x1="0" y1="0" x2="73" y2="-42"></line>
+            <line class="spoke" x1="0" y1="0" x2="-73" y2="-42"></line>
+            <!-- bolts -->
+            <g class="bolts"></g>
+            <circle class="hub" r="20"></circle>
+            <circle class="hubdot" r="6"></circle>
+          </g>
+        </svg>
+        <span class="pulse"></span>
+        <div class="stage s1"><span class="n">01</span>Ship</div>
+        <div class="stage s2"><span class="n">02</span>Verify</div>
+        <div class="stage s3"><span class="n">03</span>Learn</div>
+        <div class="stage s4"><span class="n">04</span>Improve</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="problem" class="problem">
+  <div class="wrap">
+    <div class="seclabel rv"><span class="num">01</span><span class="ttl">Why this file exists</span></div>
+    <h2 class="bighead display rv">Writing code was <span class="am">never</span> the hard part.</h2>
+    <p class="rv">Agents can write code all day. The hard part is everything after: does it actually work, in production, for a real person — <b>and can you prove it?</b></p>
+    <p class="rv">That's the loop: <b>ship → verify → learn → improve.</b> Run it with discipline and software starts improving itself, safely. Run it without and you get confident, untested, unobservable change — at machine speed.</p>
+    <div class="pullq rv">So what happens when the loop closes <span class="am">without a human in it?</span></div>
+    <p class="rv">FLYWHEEL.md is one answer: the discipline that makes a closed loop safe to run.</p>
+  </div>
+</section>
+
+<section id="loop">
+  <div class="wrap">
+    <div class="seclabel rv"><span class="num">02</span><span class="ttl">The loop</span></div>
+    <h2 class="bighead display rv">Four moves. <span class="am">Forever.</span></h2>
+    <div class="loopgrid" style="margin-top:40px">
+      <div class="lcard rv"><div class="ln">01 / ship</div><h3>Ship</h3><p>Land the change for real. Branch off main, open the PR, get CI fully green, merge. Code on a branch helps nobody.</p></div>
+      <div class="lcard rv"><div class="ln">02 / verify</div><h3>Verify</h3><p>Prove it works where it counts — in production, by you, with evidence. A screenshot. A decrypted snapshot. Real output.</p></div>
+      <div class="lcard rv"><div class="ln">03 / learn</div><h3>Learn</h3><p>Read what actually happened. The cost, the regressions, the surprise. The trail you leave is the next loop's context.</p></div>
+      <div class="lcard rv"><div class="ln">04 / improve</div><h3>Improve</h3><p>Feed it back in. Fix the cause, raise the bar, delete the toil. The wheel comes around heavier with momentum.</p></div>
+    </div>
+    <div class="loopnote rv">→ idle, the wheel still turns. <span class="am">scroll, and it accelerates.</span> that's the point.</div>
+  </div>
+</section>
+
+<section id="bar" class="bar">
+  <div class="wrap">
+    <div class="seclabel rv"><span class="num">03</span><span class="ttl">The bar — non-negotiable</span></div>
+    <h2 class="bighead display rv" style="margin-bottom:18px">Done has a <span class="am">definition.</span></h2>
+    <div class="prow rv"><div class="pn">01</div><h4>Done means deployed and verified — with evidence.</h4><div class="ps">A diagnosis is not a fix. A merge is not a deploy. A deploy is not a verification. <b>Land the whole chain, then say done — once, with the evidence.</b></div></div>
+    <div class="prow rv"><div class="pn">02</div><h4>Every iteration costs money.</h4><div class="ps">Each poll, each fetch, each run is spend. <b>Treat request volume like a budget you can blow</b> — because you can.</div></div>
+    <div class="prow rv"><div class="pn">03</div><h4>Know your data flow.</h4><div class="ps">"Works on my machine" is the most expensive lie an agent tells. <b>Trace the path from source to screen</b> before you trust it.</div></div>
+    <div class="prow rv"><div class="pn">04</div><h4>Fix the cause, never the symptom.</h4><div class="ps">No skipping a check to go green. No bypassing the guard to make the error disappear. <b>Find the root, or you'll meet it again.</b></div></div>
+    <div class="prow rv"><div class="pn">05</div><h4>Leave a trail.</h4><div class="ps">The next turn of the loop — maybe a different agent — shouldn't relearn what this one did. <b>Write down the non-obvious.</b></div></div>
+  </div>
+</section>
+
+<section id="file">
+  <div class="wrap">
+    <div class="seclabel rv"><span class="num">04</span><span class="ttl">Adopt it</span></div>
+    <div class="filewrap">
+      <div class="rv">
+        <h3>It's just a file.</h3>
+        <p>Drop <b>FLYWHEEL.md</b> in your repo root. Your agents read it before they touch anything. <b>Steal ours, fork it, make it yours.</b></p>
+        <div class="cta-row" style="margin-top:28px">
+          <a class="btn btn-primary" href="https://github.com/" target="_blank" rel="noopener">Fork the file <span class="arr">↗</span></a>
+        </div>
+      </div>
+      <div class="codecard rv">
+        <div class="codebar"><i class="r"></i><i></i><i></i><span class="fn">your-repo/</span></div>
+        <pre class="code"><span class="c">your-repo/</span>
+├── <span class="k">AGENTS.md</span>     <span class="c"># what to do</span>
+├── <span class="k">SOUL.md</span>       <span class="c"># who to be</span>
+└── <span class="you">FLYWHEEL.md</span>   <span class="c"># how to ship</span>  <span class="am">← you are here</span>
+
+<span class="c"># FLYWHEEL.md — the bar</span>
+<span class="am">-</span> Done means deployed and verified, with evidence.
+<span class="am">-</span> Every iteration costs money.
+<span class="am">-</span> Know your data flow.
+<span class="am">-</span> Fix the cause, never the symptom.
+<span class="am">-</span> Leave a trail.</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="finale">
+  <div class="wrap">
+    <div class="seclabel rv"><span class="num">05</span><span class="ttl">The other half</span></div>
+    <h2 class="bighead display rv">A loop you can't see is a <span class="am">liability.</span></h2>
+    <p class="rv">Self-improving software only works if you can watch it work. <strong style="color:var(--ink)">ClawMetry</strong> is the observability layer for agents in the loop — every iteration, every cost, every change, in real time.</p>
+    <div class="punch rv">The loop is the discipline. <span class="am">The proof is the product.</span></div>
+    <div class="cta-row rv" style="margin-top:34px">
+      <a class="btn btn-primary" href="https://clawmetry.com" target="_blank" rel="noopener">Watch your agents work <span class="arr">→</span></a>
+      <a class="btn btn-ghost" href="#top">Back to the top <span class="arr">↑</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div class="mono">FLYWHEEL<span style="color:var(--amber)">.md</span> — maintained by humans and the agents that read it.</div>
+    <div>
+      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://clawmetry.com" target="_blank" rel="noopener">ClawMetry</a>
+      <a href="https://agents.md" target="_blank" rel="noopener">AGENTS.md</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // build teeth + bolts on the wheel
+  var svgns="http://www.w3.org/2000/svg";
+  var teeth=document.querySelector("#flywheel .teeth");
+  var bolts=document.querySelector("#flywheel .bolts");
+  for(var i=0;i<48;i++){
+    var a=i/48*Math.PI*2, r1=99, r2=106;
+    var l=document.createElementNS(svgns,"line");
+    l.setAttribute("class","tooth");
+    l.setAttribute("x1",(Math.cos(a)*r1).toFixed(2));
+    l.setAttribute("y1",(Math.sin(a)*r1).toFixed(2));
+    l.setAttribute("x2",(Math.cos(a)*r2).toFixed(2));
+    l.setAttribute("y2",(Math.sin(a)*r2).toFixed(2));
+    teeth.appendChild(l);
+  }
+  for(var b=0;b<6;b++){
+    var ang=b/6*Math.PI*2 - Math.PI/2, rr=58;
+    var c=document.createElementNS(svgns,"circle");
+    c.setAttribute("class","bolt");
+    c.setAttribute("cx",(Math.cos(ang)*rr).toFixed(2));
+    c.setAttribute("cy",(Math.sin(ang)*rr).toFixed(2));
+    c.setAttribute("r","4.2");
+    bolts.appendChild(c);
+  }
+
+  // reveal on scroll
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} });
+  },{threshold:0.12, rootMargin:"0px 0px -8% 0px"});
+  document.querySelectorAll(".rv").forEach(function(el,i){ el.style.transitionDelay=(Math.min(i,6)*60)+"ms"; io.observe(el); });
+
+  // kinetic flywheel: idle spin + scroll acceleration
+  var wheel=document.getElementById("wheelspin");
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(wheel && !reduce){
+    var rot=0,last=performance.now(),lastY=window.scrollY,boost=0;
+    function frame(t){
+      var dt=Math.min((t-last)/1000,0.05); last=t;
+      var y=window.scrollY, dY=y-lastY; lastY=y;
+      boost = boost*0.88 + dY*1.1;
+      rot += (16 + Math.min(Math.abs(boost),260)*0.9)*dt + boost*0.045;
+      wheel.style.transform="rotate("+rot+"deg)";
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+})();
+</script>
+</body>
+</html>
