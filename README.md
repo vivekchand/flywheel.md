@@ -1,6 +1,6 @@
 # FLYWHEEL.md
 
-**How autonomous agents ship and improve real software — end to end.**
+**How autonomous agents ship and improve real software, end to end.**
 
 The third file in the agent canon:
 
@@ -8,13 +8,13 @@ The third file in the agent canon:
 |------|------|
 | [`AGENTS.md`](https://agents.md) | what to do |
 | [`SOUL.md`](https://soul.md) | who to be |
-| **`FLYWHEEL.md`** | **how to ship — and how to know you did** |
+| **`FLYWHEEL.md`** | **how to ship, and how to know you did** |
 
-🌀 **[flywheel.md](https://flywheel.md)** — read the manifesto.
+🌀 Read the manifesto at **[flywheel.md](https://flywheel.md)**.
 
 ## Why
 
-Writing code was never the hard part. Shipping it — and proving it works, in production — is. Close that loop with discipline and software starts improving itself, safely. Close it without and you get confident, untested, unobservable change at machine speed.
+Writing code was never the hard part. Shipping it, and proving it works in production, is. Close that loop with discipline and software starts improving itself, safely. Close it without and you get confident, untested, unobservable change at machine speed.
 
 ## The loop
 
@@ -22,7 +22,7 @@ Writing code was never the hard part. Shipping it — and proving it works, in p
 
 ## The bar
 
-- **Done means deployed and verified — with evidence.** A diagnosis is not a fix. A merge is not a deploy. A deploy is not a verification.
+- **Done means deployed and verified, with evidence.** A diagnosis is not a fix. A merge is not a deploy. A deploy is not a verification.
 - **Every iteration costs money.** Treat request volume like a budget you can blow.
 - **Know your data flow.** "Works on my machine" is the most expensive lie an agent tells.
 - **Fix the cause, never the symptom.** Never skip a check to go green.
@@ -41,7 +41,7 @@ your-repo/
 └── FLYWHEEL.md    # how to ship
 ```
 
-Steal it, fork it, make it yours — no attribution needed.
+Steal it, fork it, make it yours. No attribution needed.
 
 ## License
 
@@ -49,4 +49,4 @@ Steal it, fork it, make it yours — no attribution needed.
 
 ---
 
-*A loop you can't see is a liability. FLYWHEEL.md grew out of running real agents in production — pair it with observability that shows every iteration, every cost, every change.*
+*A loop you can't see is a liability. FLYWHEEL.md grew out of running real agents in production; pair it with observability that shows every iteration, every cost, every change.*
