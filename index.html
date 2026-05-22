@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>FLYWHEEL.md: how agents ship</title>
-<meta name="description" content="How your AI coding agents ship real software, and prove it works. FLYWHEEL.md is one Markdown file in your repo, the third file in the agent canon, after AGENTS.md and SOUL.md." />
+<meta name="description" content="How your AI coding agents ship real software, and prove it works. FLYWHEEL.md is one Markdown file in your repo, a companion to AGENTS.md and SOUL.md." />
 <meta property="og:title" content="FLYWHEEL.md: how agents ship" />
 <meta property="og:description" content="AGENTS.md says what to do. SOUL.md says who to be. FLYWHEEL.md says how to ship, and how to know you did." />
 <meta property="og:url" content="https://flywheel.md/" />
@@ -179,6 +179,7 @@
     </a>
     <div class="navlinks">
       <a href="#get">The file</a>
+      <a href="#how">How it works</a>
       <a href="#why">Why</a>
       <a href="#loop">The loop</a>
       <a href="#bar">The bar</a>
@@ -191,12 +192,12 @@
 <div class="hero">
   <div class="hero-inner">
     <div>
-      <span class="eyebrow">The third file in the agent canon</span>
+      <span class="eyebrow">A companion to AGENTS.md and SOUL.md</span>
       <h1>FLYWHEEL<span class="md">.md</span></h1>
       <p class="tagline">How your AI coding agents ship real software, and prove it works.</p>
       <p class="subtag">One Markdown file in your repo. <b>AGENTS.md</b> says <i>what</i> to build. <b>FLYWHEEL.md</b> is the playbook for <i>how</i> it ships: build it, prove it in production, learn, improve, with a human in the loop where it counts.</p>
       <div class="cta">
-        <a class="btn btn-primary" href="#loop">See how it works <span class="arr">→</span></a>
+        <a class="btn btn-primary" href="#how">See how it works <span class="arr">→</span></a>
         <a class="btn btn-ghost" href="#get">Get the file <span class="arr">↓</span></a>
       </div>
     </div>
@@ -264,6 +265,21 @@ Ship, verify, learn, improve. Each turn compounds.
   </div>
 </section>
 
+<section id="how">
+  <div class="wrap">
+    <div class="kicker">How it works</div>
+    <h2>Not a poster. Context your agent reads.</h2>
+    <p class="lead">FLYWHEEL.md is not a wall poster or a checklist humans nod at. It is context your coding agent loads before it acts, the same way it reads AGENTS.md, and it changes what the agent does at every step.</p>
+    <ul class="bar">
+      <li><div><h4>Your agent reads it first.</h4><span>Drop it in the repo root. Claude Code, Cursor, Codex, or any agent that reads project Markdown picks it up as instructions. No runtime, no plugin, no lock-in.</span></div></li>
+      <li><div><h4>Gates pause the run for you.</h4><span>At each stage you mark with a gate, the agent stops and waits for a human, then resumes when you reply. The human-in-the-loop, written down so the agent honors it.</span></div></li>
+      <li><div><h4>"Done" demands evidence, not a claim.</h4><span>The agent can't close a stage by asserting success. It has to show proof, and proof is domain-specific: a real request plus an error-rate graph for a service; a screenshot, a Playwright run, or a Lighthouse score for a frontend; an eval on held-out data against the prod baseline for a model. See the <a href="https://github.com/vivekchand/flywheel.md/tree/main/examples" target="_blank" rel="noopener" style="color:var(--accent-ink)">per-stack examples</a>.</span></div></li>
+      <li><div><h4>It's instructions, not magic.</h4><span>An agent follows FLYWHEEL.md like any other guidance. It isn't hard enforcement. Want a gate to actually block? Wire the same rule into CI. The file makes the intent explicit; your pipeline makes it binding.</span></div></li>
+    </ul>
+    <p style="margin-top:8px"><b style="color:var(--heading)">So why a file at all?</b> <span style="color:var(--muted)">You already have these steps. What's new is that an autonomous agent now runs them at machine speed. The gates and the evidence bar are what keep a closed loop from shipping confident, untested change while you sleep.</span></p>
+  </div>
+</section>
+
 <section id="why">
   <div class="wrap">
     <div class="kicker">Why this file exists</div>
@@ -314,13 +330,11 @@ Ship, verify, learn, improve. Each turn compounds.
 </section>
 <section class="finale">
   <div class="wrap">
-    <div class="kicker">The other half</div>
+    <div class="kicker">One honest note</div>
     <h2>A loop you can't see is a liability.</h2>
-    <p>Self-improving software only works if you can watch it work. <b>ClawMetry</b> is the observability layer for agents in the loop: every iteration, every cost, every change, in real time.</p>
-    <div class="punch">The loop is the discipline. <span class="am">The proof is the product.</span></div>
-    <div class="cta" style="margin-top:26px">
-      <a class="btn btn-primary" href="https://clawmetry.com" target="_blank" rel="noopener">See your agents work <span class="arr">→</span></a>
-    </div>
+    <p>This only works if you can actually watch the loop run: every iteration, every cost, every change. Use whatever observability you already trust. The standard is open and tool-agnostic.</p>
+    <div class="punch">The loop is the discipline. <span class="am">The proof is the evidence.</span></div>
+    <p style="margin-top:22px;color:var(--faint);font-size:14px">FLYWHEEL.md is maintained by the team behind <a href="https://clawmetry.com" target="_blank" rel="noopener" style="color:var(--accent-ink)">ClawMetry</a>, observability for AI agents. The file costs nothing and needs no tool to adopt.</p>
   </div>
 </section>
 
