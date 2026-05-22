@@ -120,6 +120,16 @@
   .loop .n{font-family:var(--mono);font-size:12.5px;color:var(--accent-ink)}
   .loop h3{margin-top:10px;font-size:17px;font-weight:600;color:var(--heading)}
   .loop p{margin-top:7px;font-size:14px;color:var(--faint);max-width:none;line-height:1.5}
+  /* stages (the actual file content) */
+  .stages{margin-top:30px;border-top:1px solid var(--line)}
+  .srow{display:grid;grid-template-columns:52px 1fr;gap:18px;padding:22px 0;border-bottom:1px solid var(--line)}
+  .srow .sn{font-family:var(--mono);color:var(--faint);font-size:14px;padding-top:3px}
+  .srow h3{font-size:18px;font-weight:600;color:var(--heading);margin:0}
+  .srow p{margin-top:6px;color:var(--muted);font-size:15px;line-height:1.55;max-width:64ch}
+  .srow .meta{margin-top:10px;display:flex;flex-direction:column;gap:4px;font-family:var(--mono);font-size:12.5px;line-height:1.5}
+  .srow .done{color:var(--faint)}
+  .srow .gate{color:var(--accent-ink)}
+  @media(max-width:560px){.srow{grid-template-columns:1fr;gap:6px}}
 
   /* the bar */
   .bar{margin-top:24px;counter-reset:b}
@@ -135,6 +145,9 @@
   .code .top .dot{width:9px;height:9px;border-radius:50%;background:var(--line2)}
   .code pre{padding:18px 20px;overflow-x:auto;color:#475569}
   .code .c{color:#94a3b8}.code .k{color:#0a0a0a}.code .you{color:var(--accent-ink);font-weight:500}.code .am{color:var(--accent-ink)}
+  .code .top .copybtn{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--muted);background:#fff;border:1px solid var(--line2);border-radius:6px;padding:3px 11px;cursor:pointer;transition:.15s}
+  .code .top .copybtn:hover{border-color:var(--faint);color:var(--heading)}
+  .code pre{white-space:pre-wrap}
 
   /* finale */
   .finale{background:var(--soft);border-top:1px solid var(--line)}
@@ -180,7 +193,7 @@
         <b>FLYWHEEL.md</b> says how to ship<span class="you">, and how to know you did.</span>
       </div>
       <div class="cta">
-        <a class="btn btn-primary" href="#bar">Read the manifesto <span class="arr">→</span></a>
+        <a class="btn btn-primary" href="#loop">Read the manifesto <span class="arr">→</span></a>
         <a class="btn btn-ghost" href="https://github.com/vivekchand/flywheel.md" target="_blank" rel="noopener">View on GitHub <span class="arr">↗</span></a>
       </div>
     </div>
@@ -227,14 +240,18 @@
 <section id="loop">
   <div class="wrap">
     <div class="kicker">The loop</div>
-    <h2>Define your loop.</h2>
-    <p class="lead">A flywheel is the cycle a change travels, again and again. Each turn moves through your stages, pauses where a human needs to weigh in, ships, and feeds what it learned into the next turn. These four are the default. Add your own, and mark where the agent waits for your feedback.</p>
-    <div class="loop">
-      <div class="step"><div class="n">01</div><h3>Ship</h3><p>Move the change to where users are: branch, the review your project requires, merge, release, deploy. Landing the merge is not landing the change.</p></div>
-      <div class="step"><div class="n">02</div><h3>Verify</h3><p>Prove it works in production, by you, with evidence: a screenshot, a real request, real output. A synthetic pass is not proof.</p></div>
-      <div class="step"><div class="n">03</div><h3>Learn</h3><p>Capture what actually happened: cost, regressions, the surprise, user feedback. Often the stage where the agent waits for real-world signal.</p></div>
-      <div class="step"><div class="n">04</div><h3>Improve</h3><p>Feed it into the next turn: fix the cause, raise the bar, delete the toil. Each turn's learning makes the next faster. That is what compounds.</p></div>
+    <h2>The stages a change travels.</h2>
+    <p class="lead">This is what is inside <span class="mono">FLYWHEEL.md</span>: the stages a change moves through, each with its exit criteria and, where it matters, a gate where the agent stops for a human. Ship to Improve (the wheel above) is the compounding core; the full default set is below. Rename, add, or remove to fit how you ship.</p>
+    <div class="stages">
+      <div class="srow"><div class="sn">01</div><div><h3>Plan</h3><p>Restate the goal, propose the approach, name the blast radius.</p><div class="meta"><span class="done">Done when: the plan and the risks are written down.</span><span class="gate">Gate: a human signs off on anything risky, irreversible, or ambiguous.</span></div></div></div>
+      <div class="srow"><div class="sn">02</div><div><h3>Build</h3><p>Make the change in small, reversible steps.</p><div class="meta"><span class="done">Done when: it runs and the diff is self-contained.</span></div></div></div>
+      <div class="srow"><div class="sn">03</div><div><h3>Review</h3><p>Read your own diff, run tests and linters, trace the data flow.</p><div class="meta"><span class="gate">Gate (optional): a human or a second agent reviews before merge.</span></div></div></div>
+      <div class="srow"><div class="sn">04</div><div><h3>Ship</h3><p>Merge, release, deploy. Land the whole chain, not just the merge.</p><div class="meta"><span class="done">Done when: the change is live where users are.</span></div></div></div>
+      <div class="srow"><div class="sn">05</div><div><h3>Verify</h3><p>Prove it works in production, by you, with evidence: a screenshot, a real request, real output.</p><div class="meta"><span class="done">Done when: you have seen it work for real. A synthetic pass is not proof.</span></div></div></div>
+      <div class="srow"><div class="sn">06</div><div><h3>Learn</h3><p>Capture what actually happened: cost, regressions, the surprise, user feedback.</p><div class="meta"><span class="gate">Gate (often): wait for real-world signal before the next turn.</span></div></div></div>
+      <div class="srow"><div class="sn">07</div><div><h3>Improve</h3><p>Fix the cause, raise the bar, delete the toil.</p><div class="meta"><span class="done">Done when: the next turn starts smarter than this one did.</span></div></div></div>
     </div>
+    <p style="margin-top:20px"><a href="https://github.com/vivekchand/flywheel.md/blob/main/FLYWHEEL.md" target="_blank" rel="noopener" style="color:var(--accent-ink);font-family:var(--mono);font-size:14px">Read the full FLYWHEEL.md on GitHub →</a></p>
     <p style="margin-top:24px"><b style="color:var(--heading)">Humans stay in the loop.</b> <span style="color:var(--muted)">A flywheel is not "run unattended forever." It says exactly where a human gates a stage and the agent pauses for feedback, then resumes when you reply. A CLI, a model, and a web service each get a different loop and different gates.</span></p>
   </div>
 </section>
@@ -261,18 +278,30 @@
     <p>Drop <b>FLYWHEEL.md</b> in your repo root, next to <span class="mono">AGENTS.md</span> and <span class="mono">SOUL.md</span>. Your agents read it before they touch anything. Steal it, fork it, make it yours. No attribution needed.</p>
     <p style="margin-top:14px;color:var(--muted)">New to it? Browse <a href="https://github.com/vivekchand/flywheel.md/tree/main/examples" target="_blank" rel="noopener" style="color:var(--accent-ink)">example flywheels</a> for CLIs, libraries, services, frontends, and ML projects.</p>
     <div class="code">
-      <div class="top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="margin-left:6px">your-repo/</span></div>
-      <pre><span class="c">your-repo/</span>
-├── <span class="k">AGENTS.md</span>      <span class="c"># what to do</span>
-├── <span class="k">SOUL.md</span>        <span class="c"># who to be</span>
-└── <span class="you">FLYWHEEL.md</span>    <span class="c"># how to ship</span>  <span class="am">← you are here</span>
+      <div class="top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="margin-left:6px">FLYWHEEL.md</span><button id="copybtn" class="copybtn" onclick="copyFlywheel()" aria-label="Copy FLYWHEEL.md">Copy</button></div>
+      <pre id="flywheel-src"># FLYWHEEL.md
 
-<span class="c"># FLYWHEEL.md: the bar</span>
-<span class="am">-</span> Done means deployed and verified, with evidence.
-<span class="am">-</span> Every iteration costs money.
-<span class="am">-</span> Know your data flow.
-<span class="am">-</span> Fix the cause, never the symptom.
-<span class="am">-</span> Leave a trail.</pre>
+How an agent ships and improves this project, turn by turn.
+AGENTS.md = what to do. SOUL.md = who to be. FLYWHEEL.md = how to ship.
+
+## The loop
+Ship, verify, learn, improve. Each turn compounds.
+
+## The stages (rename, add, or remove to fit your project)
+1. Plan. Propose the approach and the blast radius. Gate: a human signs off if it is risky.
+2. Build. Small, reversible steps.
+3. Review. Diff, tests, data flow. Gate (optional): a human or a second agent reviews.
+4. Ship. Merge, release, deploy. Land the whole chain.
+5. Verify. Prove it in production, with evidence. A synthetic pass is not proof.
+6. Learn. Cost, regressions, feedback. Gate (often): wait for real-world signal.
+7. Improve. Fix the cause, raise the bar, delete the toil.
+
+## The bar (holds every stage)
+- Done means deployed and verified, with evidence.
+- Every iteration costs money.
+- Know your data flow.
+- Fix the cause, never the symptom.
+- Leave a trail.</pre>
     </div>
     <div class="cta" style="margin-top:24px">
       <a class="btn btn-primary" href="https://github.com/vivekchand/flywheel.md" target="_blank" rel="noopener">Fork the file <span class="arr">↗</span></a>
@@ -304,6 +333,13 @@
 </footer>
 
 <script>
+function copyFlywheel(){
+  var el=document.getElementById('flywheel-src'); if(!el) return;
+  var txt=el.innerText;
+  var done=function(){var b=document.getElementById('copybtn'); if(b){var o=b.textContent; b.textContent='Copied'; setTimeout(function(){b.textContent=o;},1800);}};
+  var fallback=function(){var t=document.createElement('textarea'); t.value=txt; t.style.position='fixed'; t.style.opacity='0'; document.body.appendChild(t); t.select(); try{document.execCommand('copy'); done();}catch(e){} document.body.removeChild(t);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,fallback);}else{fallback();}
+}
 (function(){
   var svgns="http://www.w3.org/2000/svg";
   var teeth=document.querySelector("#wheel .teeth");
