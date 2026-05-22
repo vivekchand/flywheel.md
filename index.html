@@ -60,20 +60,19 @@
   .btn-ghost:hover{background:var(--soft);border-color:var(--faint)}
   .btn .arr{transition:transform .15s}.btn:hover .arr{transform:translateX(2px)}
 
-  /* hero wheel (small, line-art) */
-  .wheelwrap{width:200px;height:200px;display:grid;place-items:center}
-  @media(max-width:760px){.wheelwrap{width:130px;height:130px;justify-self:start;margin-top:8px}}
-  #wheel{width:100%;height:100%}
-  #wheel .ring{fill:none;stroke:var(--line2);stroke-width:2}
-  #wheel .rim{fill:none;stroke:var(--heading);stroke-width:2.5}
-  #wheel .spk{stroke:var(--line2);stroke-width:3;stroke-linecap:round}
+  /* hero flywheel (rotating brand hook) */
+  .wheelwrap{width:300px;height:300px;display:grid;place-items:center}
+  @media(max-width:760px){.wheelwrap{width:200px;height:200px;justify-self:start;margin-top:4px}}
+  #wheel{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 14px 26px rgba(10,10,10,0.07))}
+  #wheel .band{fill:none;stroke:#eef1f4;stroke-width:15}
+  #wheel .rim{fill:none;stroke:var(--heading);stroke-width:2.2}
+  #wheel .spk{stroke:#9aa1ad;stroke-width:5;stroke-linecap:round}
   #wheel .spk.a{stroke:var(--accent)}
-  #wheel .hub{fill:#fff;stroke:var(--heading);stroke-width:2.5}
+  #wheel .tick{stroke:#cbd2da;stroke-width:2}
+  #wheel .bolt{fill:var(--accent)}
+  #wheel .hub{fill:#fff;stroke:var(--heading);stroke-width:2.6}
   #wheel .hubdot{fill:var(--accent)}
-  #wheel .tick{stroke:var(--line2);stroke-width:1.5}
-  .spin{transform-origin:50% 50%;animation:spin 26s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  @media(prefers-reduced-motion:reduce){.spin{animation:none}}
+  @media(prefers-reduced-motion:reduce){#wheelspin{transform:rotate(-8deg)}}
 
   /* sections */
   section{padding:60px 0;border-top:1px solid var(--line)}
@@ -165,19 +164,21 @@
       </div>
     </div>
     <div class="wheelwrap">
-      <svg id="wheel" viewBox="-60 -60 120 120" aria-hidden="true">
-        <g class="spin">
-          <circle class="ring" r="55"/>
-          <g class="ticks"></g>
-          <circle class="rim" r="49"/>
-          <line class="spk a" x1="0" y1="0" x2="0" y2="-49" stroke-linecap="round"/>
-          <line class="spk" x1="0" y1="0" x2="42" y2="25" stroke-linecap="round"/>
-          <line class="spk" x1="0" y1="0" x2="-42" y2="25" stroke-linecap="round"/>
-          <line class="spk" x1="0" y1="0" x2="42" y2="-25" stroke-linecap="round"/>
-          <line class="spk" x1="0" y1="0" x2="-42" y2="-25" stroke-linecap="round"/>
-          <line class="spk" x1="0" y1="0" x2="0" y2="49" stroke-linecap="round"/>
-          <circle class="hub" r="11"/>
-          <circle class="hubdot" r="3.5"/>
+      <svg id="wheel" viewBox="-110 -110 220 220" aria-hidden="true">
+        <g id="wheelspin">
+          <circle class="band" r="92"/>
+          <circle class="rim" r="99.5"/>
+          <circle class="rim" r="84.5"/>
+          <g class="teeth"></g>
+          <line class="spk a" x1="0" y1="0" x2="0" y2="-84"/>
+          <line class="spk" x1="0" y1="0" x2="73" y2="42"/>
+          <line class="spk" x1="0" y1="0" x2="-73" y2="42"/>
+          <line class="spk" x1="0" y1="0" x2="73" y2="-42"/>
+          <line class="spk" x1="0" y1="0" x2="-73" y2="-42"/>
+          <line class="spk" x1="0" y1="0" x2="0" y2="84"/>
+          <g class="bolts"></g>
+          <circle class="hub" r="19"/>
+          <circle class="hubdot" r="6"/>
         </g>
       </svg>
     </div>
@@ -264,7 +265,7 @@
 
 <footer>
   <div class="wrap foot">
-    <span>FLYWHEEL<span class="md">.md</span>, maintained by humans and the agents that read it.</span>
+    <span>FLYWHEEL<span class="md">.md</span> created by <a href="https://github.com/vivekchand" target="_blank" rel="noopener">@vivekchand</a>, born at <a href="https://clawmetry.com" target="_blank" rel="noopener">ClawMetry</a>.</span>
     <span class="links">
       <a href="https://github.com/vivekchand/flywheel.md" target="_blank" rel="noopener">GitHub</a>
       <a href="https://clawmetry.com" target="_blank" rel="noopener">ClawMetry</a>
@@ -276,8 +277,25 @@
 <script>
 (function(){
   var svgns="http://www.w3.org/2000/svg";
-  var ticks=document.querySelector("#wheel .ticks");
-  if(ticks){for(var i=0;i<36;i++){var a=i/36*Math.PI*2,r1=55,r2=59;var l=document.createElementNS(svgns,"line");l.setAttribute("class","tick");l.setAttribute("x1",(Math.cos(a)*r1).toFixed(2));l.setAttribute("y1",(Math.sin(a)*r1).toFixed(2));l.setAttribute("x2",(Math.cos(a)*r2).toFixed(2));l.setAttribute("y2",(Math.sin(a)*r2).toFixed(2));ticks.appendChild(l);}}
+  var teeth=document.querySelector("#wheel .teeth");
+  var bolts=document.querySelector("#wheel .bolts");
+  if(teeth){for(var i=0;i<48;i++){var a=i/48*Math.PI*2,r1=99,r2=106;var l=document.createElementNS(svgns,"line");l.setAttribute("class","tick");l.setAttribute("x1",(Math.cos(a)*r1).toFixed(2));l.setAttribute("y1",(Math.sin(a)*r1).toFixed(2));l.setAttribute("x2",(Math.cos(a)*r2).toFixed(2));l.setAttribute("y2",(Math.sin(a)*r2).toFixed(2));teeth.appendChild(l);}}
+  if(bolts){for(var b=0;b<6;b++){var ang=b/6*Math.PI*2-Math.PI/2,rr=57;var c=document.createElementNS(svgns,"circle");c.setAttribute("class","bolt");c.setAttribute("cx",(Math.cos(ang)*rr).toFixed(2));c.setAttribute("cy",(Math.sin(ang)*rr).toFixed(2));c.setAttribute("r","4");bolts.appendChild(c);}}
+  // Rotate around the SVG's centered origin (0,0). Idle spin + scroll acceleration.
+  var wheel=document.getElementById("wheelspin");
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(wheel&&!reduce){
+    var rot=0,last=performance.now(),lastY=window.scrollY,boost=0;
+    function frame(t){
+      var dt=Math.min((t-last)/1000,0.05);last=t;
+      var y=window.scrollY,dY=y-lastY;lastY=y;
+      boost=boost*0.9+dY*1.0;
+      rot+=(22+Math.min(Math.abs(boost),240)*0.85)*dt+boost*0.04;
+      wheel.style.transform="rotate("+rot+"deg)";
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
 })();
 </script>
 </body>
