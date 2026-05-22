@@ -1,60 +1,69 @@
 # FLYWHEEL.md
 
-**How an autonomous agent ships and improves real software, end to end.**
+**Your project's loop for shipping and improving software, with humans in the loop where it matters.**
 
-The third file in the agent canon:
+The third file in the agent canon: `AGENTS.md` says what to do, `SOUL.md` says who to be, `FLYWHEEL.md` says how a change travels from idea to shipped to improved, turn after turn.
 
-- `AGENTS.md` says **what to do** (the project's instructions).
-- `SOUL.md` says **who to be** (the agent's identity).
-- `FLYWHEEL.md` says **how to ship**, and how to know you did.
+## What a flywheel is
 
-Drop this file in your repo root. Your agents read it before they touch anything. Steal it, fork it, make it yours.
+A flywheel is a loop a change travels again and again. Each turn it moves through your stages, pauses where a human needs to weigh in, ships, and feeds what it learned into the next turn. The point is momentum that compounds: every turn makes the next one faster and safer.
 
----
+This file is where you define that loop, so an agent follows your *process*, not just your goal. It is not a "definition of done" checklist. It is the shape of how you build, release, and evolve.
 
-## The north star
+## The stages
 
-**Don't stop at "the code compiles." Stop at "verified working in production, by me, with evidence."**
+A change flows through stages. The set below is a starting point. Add, remove, and reorder to match how your project actually ships and evolves. For each stage, write two things:
 
-Writing code was never the hard part. The hard part is everything after: does it actually work, in production, for a real person? And can you prove it? Close that loop with discipline and software starts improving itself, safely. Close it without discipline and you get confident, untested, unobservable change at machine speed.
+- **Done when:** the exit criteria, so the agent knows when to move on.
+- **Gate:** does the agent proceed on its own, or stop and wait for a human?
 
-## The loop
+1. **Plan.** Restate the goal, propose the approach, name the blast radius.
+   - *Done when:* the plan and the risks are written down.
+   - *Gate (human):* wait for a sign-off on anything risky, irreversible, or ambiguous.
+2. **Build.** Make the change in small, reversible steps.
+   - *Done when:* it runs and the diff is self-contained.
+3. **Review.** Read your own diff, run tests and linters, trace the data flow.
+   - *Gate (optional):* a human or a second agent reviews before merge.
+4. **Ship.** Merge, release, deploy. Land the whole chain, not just the merge.
+   - *Done when:* the change is live where users are.
+5. **Verify.** Prove it works in production, by you, with evidence: a screenshot, a real request, real output.
+   - *Done when:* you have seen it work for real. A synthetic pass is not proof.
+6. **Learn.** Capture what actually happened: cost, regressions, the surprise, user feedback.
+   - *Gate (often):* wait for real-world signal before starting the next turn.
+7. **Improve.** Feed it back: fix the cause, raise the bar, delete the toil.
+   - *Done when:* the next turn starts smarter than this one did.
 
-Every change rides the same four moves. The wheel never stops turning.
+## Humans stay in the loop
 
-1. **Ship.** Land the change for real: branch off main, open the PR, get CI fully green, merge. Code on a branch helps nobody.
-2. **Verify.** Prove it works where it counts: in production, by you, with evidence. A screenshot of the actual surface. Real output. Not a synthetic test that passes while reality flunks.
-3. **Learn.** Read what actually happened: the cost, the regressions, the surprise. The trail you leave is the next loop's context.
-4. **Improve.** Feed it back: fix the cause, raise the bar, delete the toil. The wheel comes around heavier with momentum.
+A flywheel is not "let the agent run unattended forever." It makes explicit *where* a human stays in the loop: which stages need a sign-off, and where the agent pauses for feedback and resumes when you reply. Mark those gates. Everything between them, the agent turns on its own. Loosen the gates as trust grows; tighten them for risky surfaces.
 
-## The bar (non-negotiable)
+## What makes it compound
 
-1. **Done means deployed and verified, with evidence.** A diagnosis is not a fix. A merge is not a deploy. A deploy is not a verification. Land the whole chain, then say done: once, plainly, with the evidence.
-2. **Every iteration costs money.** Each poll, each fetch, each run is spend. Treat request volume like a budget you can blow, because you can. Measure before you ship; "it works" is not the same as "it works without a request storm."
-3. **Know your data flow.** "Works on my machine" is the most expensive lie an agent tells. Trace the path from source to screen before you trust it. Most "works locally, broken in prod" bugs live in that gap.
-4. **Fix the cause, never the symptom.** No skipping a check to go green. No bypassing the guard to make the error disappear. If a test encodes the wrong expectation, fix the test to match reality. Don't delete it. Find the root, or you'll meet it again.
-5. **Leave a trail.** The next turn of the loop (maybe a different agent, maybe future-you) shouldn't relearn what this one did. Write down the non-obvious: the gotcha, the constraint, the why.
+The difference between a flywheel and a checklist: **Learn** feeds the next **Plan**. Cost data, regressions, and feedback become the context that makes the next change faster and safer. Leave a trail so the wheel comes around heavier each turn.
 
-## Judgment
+## The bar (holds at every stage)
 
-- Decide ship-vs-hold trade-offs yourself; state a one-line rationale and act. Don't bounce routine decisions back to a human.
-- When a finding contradicts the premise of a request, surface it with evidence and propose the path that actually works.
-- A red check is a real signal. Make it green by fixing the cause, never by silencing the check.
-- Carefully weigh reversibility and blast radius. Local, reversible actions: just do them. Hard-to-reverse or shared-state actions (publishing, deleting, force-pushing, anything others will see): confirm first.
+A few rules that do not change between stages, whatever stages you choose:
 
-## How to adopt
+- Done means deployed and verified, with evidence.
+- Every iteration costs money.
+- Know your data flow.
+- Fix the cause, never the symptom.
+- Leave a trail.
+
+## Make it yours
 
 ```
 your-repo/
 ├── AGENTS.md      # what to do
 ├── SOUL.md        # who to be
-└── FLYWHEEL.md    # how to ship   ← you are here
+└── FLYWHEEL.md    # how you ship and evolve, turn by turn
 ```
 
-Copy this file in. Trim it to your stack, add your gotchas, keep the bar. The point isn't the exact words. It's that "done" has a shared definition your agents can be held to.
+Copy this in, then rewrite the stages and gates for your project. A CLI, a model, and a web service have different loops and different human gates. The point is a shared, explicit process your agents and your team can both follow, not these exact words.
 
 ---
 
-*A loop you can't see is a liability. Self-improving software only works if you can watch it work. FLYWHEEL.md grew out of running real agents in production; pair it with observability that shows every iteration, every cost, every change.*
+*A loop you cannot see is a liability. FLYWHEEL.md grew out of running real agents in production; pair it with observability that shows every turn.*
 
-🤖 Maintained by humans and the agents that read it. Found a new gotcha? Add it.
+🤖 Maintained by humans and the agents that read it.

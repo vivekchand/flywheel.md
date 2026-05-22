@@ -217,20 +217,23 @@
 <section id="loop">
   <div class="wrap">
     <div class="kicker">The loop</div>
-    <h2>Four moves. Forever.</h2>
+    <h2>Define your loop.</h2>
+    <p class="lead">A flywheel is the cycle a change travels, again and again. Each turn moves through your stages, pauses where a human needs to weigh in, ships, and feeds what it learned into the next turn. These four are the default. Add your own, and mark where the agent waits for your feedback.</p>
     <div class="loop">
-      <div class="step"><div class="n">01</div><h3>Ship</h3><p>Land the change for real: branch, PR, green CI, merge. Code on a branch helps nobody.</p></div>
-      <div class="step"><div class="n">02</div><h3>Verify</h3><p>Prove it works in production, by you, with evidence. A screenshot. Real output.</p></div>
-      <div class="step"><div class="n">03</div><h3>Learn</h3><p>Read what actually happened: cost, regressions, surprises. The trail is the next loop's context.</p></div>
-      <div class="step"><div class="n">04</div><h3>Improve</h3><p>Feed it back: fix the cause, raise the bar, delete the toil. The wheel comes around heavier.</p></div>
+      <div class="step"><div class="n">01</div><h3>Ship</h3><p>Move the change to where users are: branch, the review your project requires, merge, release, deploy. Landing the merge is not landing the change.</p></div>
+      <div class="step"><div class="n">02</div><h3>Verify</h3><p>Prove it works in production, by you, with evidence: a screenshot, a real request, real output. A synthetic pass is not proof.</p></div>
+      <div class="step"><div class="n">03</div><h3>Learn</h3><p>Capture what actually happened: cost, regressions, the surprise, user feedback. Often the stage where the agent waits for real-world signal.</p></div>
+      <div class="step"><div class="n">04</div><h3>Improve</h3><p>Feed it into the next turn: fix the cause, raise the bar, delete the toil. Each turn's learning makes the next faster. That is what compounds.</p></div>
     </div>
+    <p style="margin-top:24px"><b style="color:var(--heading)">Humans stay in the loop.</b> <span style="color:var(--muted)">A flywheel is not "run unattended forever." It says exactly where a human gates a stage and the agent pauses for feedback, then resumes when you reply. A CLI, a model, and a web service each get a different loop and different gates.</span></p>
   </div>
 </section>
 
 <section id="bar">
   <div class="wrap">
-    <div class="kicker">The bar (non-negotiable)</div>
-    <h2>Done has a definition.</h2>
+    <div class="kicker">Principles</div>
+    <h2>A few rules that hold every turn.</h2>
+    <p class="lead">The loop is the shape of your process. These don't change between stages, whatever stages you choose.</p>
     <ul class="bar">
       <li><div><h4>Done means deployed and verified, with evidence.</h4><span>A diagnosis is not a fix. A merge is not a deploy. A deploy is not a verification. Land the whole chain, then say done.</span></div></li>
       <li><div><h4>Every iteration costs money.</h4><span>Each poll, each fetch, each run is spend. Treat request volume like a budget you can blow, because you can.</span></div></li>
