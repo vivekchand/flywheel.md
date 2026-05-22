@@ -2,7 +2,7 @@
 
 **Your project's loop for shipping and improving software, with humans in the loop where it matters.**
 
-A companion to `AGENTS.md` and `SOUL.md`: `AGENTS.md` says what to do, `SOUL.md` says who to be, `FLYWHEEL.md` says how a change travels from idea to shipped to improved, turn after turn.
+A companion to `AGENTS.md`: it says what to do, `SOUL.md` (if you use one) says who to be, `FLYWHEEL.md` says how a change travels from idea to shipped to improved, turn after turn.
 
 ## What a flywheel is
 
