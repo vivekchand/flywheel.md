@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="logo.png" alt="FLYWHEEL.md" width="120" height="120">
+</p>
+
 # FLYWHEEL.md
 
 **How autonomous agents ship and improve real software, end to end.**
@@ -10,7 +14,7 @@ The third file in the agent canon:
 | [`SOUL.md`](https://soul.md) | who to be |
 | **`FLYWHEEL.md`** | **how to ship, and how to know you did** |
 
-🌀 Read the manifesto at **[flywheel.md](https://flywheel.md)**.
+Read the manifesto at **[flywheel.md](https://flywheel.md)**.
 
 ## Why
 

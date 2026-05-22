@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 150" width="560" height="150" font-family="Helvetica, Arial, sans-serif">
+  <g transform="translate(80,75) scale(0.59)">
+    <circle r="92" fill="none" stroke="#eef1f4" stroke-width="15"/>
+    <circle r="99.5" fill="none" stroke="#0a0a0a" stroke-width="2.5"/>
+    <circle r="84.5" fill="none" stroke="#0a0a0a" stroke-width="2.5"/>
+    <g stroke="#9aa1ad" stroke-width="6" stroke-linecap="round">
+      <line x1="0" y1="0" x2="73" y2="42"/><line x1="0" y1="0" x2="-73" y2="42"/>
+      <line x1="0" y1="0" x2="73" y2="-42"/><line x1="0" y1="0" x2="-73" y2="-42"/>
+      <line x1="0" y1="0" x2="0" y2="84"/>
+    </g>
+    <line x1="0" y1="0" x2="0" y2="-84" stroke="#FF6A1A" stroke-width="6" stroke-linecap="round"/>
+    <circle r="19" fill="#ffffff" stroke="#0a0a0a" stroke-width="3"/>
+    <circle r="6" fill="#FF6A1A"/>
+  </g>
+  <text x="165" y="93" font-size="62" font-weight="700" fill="#0a0a0a" letter-spacing="-1">FLYWHEEL<tspan fill="#c2c8d0" font-weight="600">.md</tspan></text>
+</svg>

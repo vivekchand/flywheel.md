@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="Helvetica, Arial, sans-serif">
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <circle cx="1000" cy="300" r="280" fill="#fff7f0"/>
+  <text x="90" y="135" font-family="monospace" font-size="23" font-weight="600" letter-spacing="4" fill="#c2410c">THE THIRD FILE IN THE AGENT CANON</text>
+  <text x="86" y="265" font-size="104" font-weight="800" letter-spacing="-3" fill="#0a0a0a">FLYWHEEL<tspan fill="#cbd2da" font-weight="700">.md</tspan></text>
+  <text x="90" y="340" font-size="34" fill="#4a5565">How autonomous agents ship and improve</text>
+  <text x="90" y="388" font-size="34" fill="#4a5565">real software.</text>
+  <text x="90" y="558" font-family="monospace" font-size="30" font-weight="600" fill="#0a0a0a">flywheel.md</text>
+  <g transform="translate(1000,300) scale(1.45)">
+    <circle r="92" fill="none" stroke="#eef1f4" stroke-width="15"/>
+    <circle r="99.5" fill="none" stroke="#0a0a0a" stroke-width="2.5"/>
+    <circle r="84.5" fill="none" stroke="#0a0a0a" stroke-width="2.5"/>
+    <g stroke="#9aa1ad" stroke-width="6" stroke-linecap="round">
+      <line x1="0" y1="0" x2="73" y2="42"/><line x1="0" y1="0" x2="-73" y2="42"/>
+      <line x1="0" y1="0" x2="73" y2="-42"/><line x1="0" y1="0" x2="-73" y2="-42"/>
+      <line x1="0" y1="0" x2="0" y2="84"/>
+    </g>
+    <line x1="0" y1="0" x2="0" y2="-84" stroke="#FF6A1A" stroke-width="6" stroke-linecap="round"/>
+    <g fill="#FF6A1A"><circle cx="0" cy="-57" r="4.5"/><circle cx="49" cy="29" r="4.5"/><circle cx="-49" cy="29" r="4.5"/><circle cx="49" cy="-29" r="4.5"/><circle cx="-49" cy="-29" r="4.5"/><circle cx="0" cy="57" r="4.5"/></g>
+    <circle r="19" fill="#ffffff" stroke="#0a0a0a" stroke-width="3"/>
+    <circle r="6" fill="#FF6A1A"/>
+  </g>
+</svg>
