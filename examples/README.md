@@ -1,6 +1,6 @@
 # FLYWHEEL.md examples
 
-Illustrative `FLYWHEEL.md` files for common project archetypes. These are starting points to copy and adapt, not official templates for any named project. Pick the one closest to yours, drop it in your repo root as `FLYWHEEL.md`, and tailor it. Keep the bar.
+Illustrative `FLYWHEEL.md` files for common project archetypes. Each shows a **different loop**, different stages and different human gates, because a CLI, a model, and a web service do not ship the same way. These are starting points, not official templates for any named project. Pick the one closest to yours, drop it in your repo root as `FLYWHEEL.md`, and tune the stages and gates to your process.
 
 - [`cli-tool.md`](./cli-tool.md) — command-line tools
 - [`library.md`](./library.md) — libraries and SDKs

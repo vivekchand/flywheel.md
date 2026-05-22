@@ -1,22 +1,33 @@
 # FLYWHEEL.md
 
-> Example for a frontend or web app. Adapt it, keep the bar. The full idea: [flywheel.md](https://flywheel.md).
+> Example for a frontend or web app. Adapt the stages and gates to your process. The full idea: [flywheel.md](https://flywheel.md).
 
-**How an agent ships and improves this app, end to end.** `AGENTS.md` says what to do, `SOUL.md` says who to be, `FLYWHEEL.md` says how to ship.
+**How an agent ships and improves this app, turn by turn.** `AGENTS.md` says what to do, `SOUL.md` says who to be, `FLYWHEEL.md` says how a change travels from idea to deployed to improved.
 
 ## The loop
 
-Ship → verify → learn → improve. Every release turns the wheel.
+1. **Plan.** Scope the change. Does it touch a critical user flow?
+2. **Build.** Implement, watching bundle size and request count as you go.
+3. **Review.** Type-check, tests, and the performance budget (bundle, requests, web vitals).
+4. **Preview.** Deploy a preview build.
+   - *Gate (human):* a person looks at the preview and signs off on the look and feel. UX is judgment, not a test.
+5. **Ship.** Deploy to production.
+6. **Verify.** Open the real page, walk the golden path in a browser, screenshot it; check your target browsers.
+   - *Done when:* you have seen the feature work in a real browser, not just a passing unit test.
+7. **Learn.** Real-user monitoring: errors, web vitals, drop-off.
+8. **Improve.** Fix the cause. No `!important` or arbitrary timeout to mask a race or layout bug.
 
-## The bar (non-negotiable)
+## Humans in the loop
 
-1. **Done means deployed and verified in a real browser.** Open the actual page after the deploy, use the feature on the golden path, and screenshot it. A passing unit test is not a working UI.
-2. **No regressions on the golden path.** The core flows must still work. Type-checks and tests verify correctness, not that the feature feels right.
-3. **Respect the performance budget.** Watch bundle size and request count. A poller on every screen, or a megabyte added to first load, is a regression even if it "works."
-4. **Accessible and cross-browser.** Keyboard, contrast, and the browsers you claim to support are part of done.
-5. **Fix the cause, never the symptom.** No `!important` or arbitrary timeout to mask a layout or race bug.
-6. **Leave a trail.** Changelog plus a before/after note, so the next change starts informed.
+Frontends are the most human-gated archetype: the **visual review at Preview**. A test cannot tell you it looks right, so pause there for a human.
+
+## The bar (every stage)
+
+- Done means verified in a real browser, with a screenshot.
+- No regressions on the golden path.
+- Respect the performance budget; stay accessible and cross-browser.
+- Leave a trail.
 
 ## How to adopt
 
-Drop this file in your repo root next to `AGENTS.md` and `SOUL.md`, then trim it to your app.
+Drop this in your repo root next to `AGENTS.md` and `SOUL.md`, then tune the stages and gates to your app.
