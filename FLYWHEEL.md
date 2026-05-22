@@ -10,6 +10,8 @@ A flywheel is a loop a change travels again and again. Each turn it moves throug
 
 This file is where you define that loop, so an agent follows your *process*, not just your goal. It is not a "definition of done" checklist. It is the shape of how you build, release, and evolve.
 
+Why now: when agents write the code, coding stops being the bottleneck. Verification, review, and ownership become it, and the processes built to protect scarce engineering time quietly stop working. This file is where you rewrite them.
+
 ## The stages
 
 A change flows through four stages, the same four the wheel turns. The set below is the default. Split a stage (Ship is really plan, build, and review), add, remove, or reorder to match how your project actually ships and evolves. For each stage, write two things:
@@ -29,7 +31,7 @@ A change flows through four stages, the same four the wheel turns. The set below
 
 ## Humans stay in the loop
 
-A flywheel is not "let the agent run unattended forever." It makes explicit *where* a human stays in the loop: which stages need a sign-off, and where the agent pauses for feedback and resumes when you reply. Mark those gates. Everything between them, the agent turns on its own. Loosen the gates as trust grows; tighten them for risky surfaces.
+A flywheel is not "let the agent run unattended forever." It makes explicit *where* a human stays in the loop: which stages need a sign-off, and where the agent pauses for feedback and resumes when you reply. Mark those gates. Put them where human judgment still wins: risk and trust boundaries, irreversible changes, legal, and product taste. Everything between them, the agent turns on its own. Loosen the gates as trust grows; tighten them for risky surfaces.
 
 ## What makes it compound
 
@@ -43,7 +45,8 @@ A few rules that do not change between stages, whatever stages you choose:
 - Every iteration costs money.
 - Know your data flow.
 - Fix the cause, never the symptom.
-- Leave a trail.
+- Leave a trail, in the codebase, where it stays in the loop. A doc outside the loop rots.
+- Audit the loop itself. Processes pile up and nobody deletes them; every few turns, ask of each stage and gate whether it still earns its place, and cut what does not.
 
 ## Make it yours
 
