@@ -75,19 +75,19 @@
 
   /* hero flywheel (rotating brand hook) */
   .wheelwrap{width:400px;height:400px;position:relative;display:grid;place-items:center}
-  @media(max-width:900px){.wheelwrap{width:320px;height:320px}}
-  @media(max-width:760px){.wheelwrap{width:210px;height:210px;justify-self:start;margin-top:4px}}
+  @media(max-width:900px){.wheelwrap{width:360px;height:360px}}
+  @media(max-width:760px){.wheelwrap{width:min(280px,86vw);height:min(280px,86vw);justify-self:center;margin:10px auto 0}}
   #wheel{width:260px;height:260px;overflow:visible;filter:drop-shadow(0 14px 26px rgba(10,10,10,0.07))}
-  @media(max-width:900px){#wheel{width:240px;height:240px}}
-  @media(max-width:760px){#wheel{width:100%;height:100%}}
-  /* loop-stage labels around the wheel (wide screens) */
-  .stage{position:absolute;display:none;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--heading);font-weight:500;white-space:nowrap;line-height:1.3}
+  @media(max-width:900px){#wheel{width:230px;height:230px}}
+  @media(max-width:760px){#wheel{width:168px;height:168px}}
+  /* loop-stage labels around the wheel */
+  .stage{position:absolute;display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--heading);font-weight:500;white-space:nowrap;line-height:1.3}
   .stage .n{display:block;color:var(--accent-ink);font-size:10px;letter-spacing:.08em;margin-bottom:3px}
   .stage.s1{top:8px;left:50%;transform:translateX(-50%);text-align:center}
   .stage.s2{right:6px;top:50%;transform:translateY(-50%);text-align:right}
   .stage.s3{bottom:8px;left:50%;transform:translateX(-50%);text-align:center}
   .stage.s4{left:6px;top:50%;transform:translateY(-50%);text-align:left}
-  @media(min-width:901px){.stage{display:block}}
+  @media(max-width:760px){.stage{font-size:9.5px;letter-spacing:.04em}.stage .n{font-size:8.5px;margin-bottom:2px}}
   #wheel .band{fill:none;stroke:#eef1f4;stroke-width:15}
   #wheel .rim{fill:none;stroke:var(--heading);stroke-width:2.2}
   #wheel .spk{stroke:#9aa1ad;stroke-width:5;stroke-linecap:round}
@@ -242,14 +242,11 @@ How an agent ships and improves this project, turn by turn.
 ## The loop
 Ship, verify, learn, improve. Each turn compounds.
 
-## The stages (rename, add, or remove to fit your project)
-1. Plan. Propose the approach and the blast radius. Gate: a human signs off if it is risky.
-2. Build. Small, reversible steps.
-3. Review. Diff, tests, data flow. Gate (optional): a human or a second agent reviews.
-4. Ship. Merge, release, deploy. Land the whole chain.
-5. Verify. Prove it in production, with evidence. A synthetic pass is not proof.
-6. Learn. Cost, regressions, feedback. Gate (often): wait for real-world signal.
-7. Improve. Fix the cause, raise the bar, delete the toil.
+## The stages (the four the wheel turns, split or rename to fit)
+1. Ship. Plan the approach and blast radius, build in small reversible steps, review diff/tests/data flow, then merge, release, deploy. Gate: a human signs off on anything risky or irreversible.
+2. Verify. Prove it in production, with evidence. A passing test is not proof.
+3. Learn. Cost, regressions, feedback. Gate (often): wait for real-world signal.
+4. Improve. Fix the cause, raise the bar, delete the toil.
 
 ## The bar (holds every stage)
 - Done means deployed and verified, with evidence.
@@ -298,16 +295,13 @@ Ship, verify, learn, improve. Each turn compounds.
   <div class="wrap">
     <div class="kicker">The loop</div>
     <h2>The stages a change travels.</h2>
-    <p class="lead">This is what's inside <span class="mono">FLYWHEEL.md</span>: the stages a change moves through. Each stage has a finish line, and some have a <b>gate</b>, a point where the agent stops and waits for a human before going on. The seven below are a starting point. Rename, add, or remove them to match how your team ships.</p>
+    <p class="lead">This is what's inside <span class="mono">FLYWHEEL.md</span>: the four stages a change moves through, the same four the wheel turns. Each stage has a finish line, and some have a <b>gate</b>, a point where the agent stops and waits for a human before going on. Four is the default. Split <b>Ship</b> into plan, build, and review, or add stages, to match how your team works.</p>
     <p>Three things to read here: the <b>stages</b> (the steps a change travels), the <b>gates</b> (where a human stays in control), and <a href="#bar" style="color:var(--accent-ink)">the bar</a> (the rules that hold at every stage).</p>
     <div class="stages">
-      <div class="srow"><div class="sn">01</div><div><h3>Plan</h3><p>Restate the goal, propose the approach, name the blast radius.</p><div class="meta"><span class="done">Done when: the plan and the risks are written down.</span><span class="gate">Gate: a human signs off on anything risky, irreversible, or ambiguous.</span></div></div></div>
-      <div class="srow"><div class="sn">02</div><div><h3>Build</h3><p>Make the change in small, reversible steps.</p><div class="meta"><span class="done">Done when: it runs and the diff is self-contained.</span></div></div></div>
-      <div class="srow"><div class="sn">03</div><div><h3>Review</h3><p>Read your own diff, run tests and linters, trace the data flow.</p><div class="meta"><span class="gate">Gate (optional): a human or a second agent reviews before merge.</span></div></div></div>
-      <div class="srow"><div class="sn">04</div><div><h3>Ship</h3><p>Merge, release, deploy. Land the whole chain, not just the merge.</p><div class="meta"><span class="done">Done when: the change is live where users are.</span></div></div></div>
-      <div class="srow"><div class="sn">05</div><div><h3>Verify</h3><p>Prove it works in production, by you, with evidence: a screenshot, a real request, real output.</p><div class="meta"><span class="done">Done when: you have seen it work for real. Passing tests are not the same as proof.</span></div></div></div>
-      <div class="srow"><div class="sn">06</div><div><h3>Learn</h3><p>Capture what actually happened: cost, regressions, the surprise, user feedback.</p><div class="meta"><span class="gate">Gate (often): wait for real-world signal before the next turn.</span></div></div></div>
-      <div class="srow"><div class="sn">07</div><div><h3>Improve</h3><p>Fix the cause, raise the bar, delete the toil.</p><div class="meta"><span class="done">Done when: the next turn starts smarter than this one did.</span></div></div></div>
+      <div class="srow"><div class="sn">01</div><div><h3>Ship</h3><p>Plan the approach and name the blast radius, build in small reversible steps, review your own diff, tests, and data flow, then merge, release, and deploy. Land the whole chain, not just the merge.</p><div class="meta"><span class="done">Done when: the change is live where users are.</span><span class="gate">Gate: a human signs off before anything risky or irreversible, and optionally reviews before merge.</span></div></div></div>
+      <div class="srow"><div class="sn">02</div><div><h3>Verify</h3><p>Prove it works in production, by you, with evidence: a real request, a screenshot, real output.</p><div class="meta"><span class="done">Done when: you have seen it work for real. Passing tests are not the same as proof.</span></div></div></div>
+      <div class="srow"><div class="sn">03</div><div><h3>Learn</h3><p>Capture what actually happened: cost, regressions, the surprise, user feedback.</p><div class="meta"><span class="done">Done when: you know what this turn really cost and changed.</span><span class="gate">Gate (often): wait for real-world signal before the next turn.</span></div></div></div>
+      <div class="srow"><div class="sn">04</div><div><h3>Improve</h3><p>Fix the cause, raise the bar, delete the toil.</p><div class="meta"><span class="done">Done when: the next turn starts smarter than this one did.</span></div></div></div>
     </div>
     <p style="margin-top:20px"><a href="https://github.com/vivekchand/flywheel.md/blob/main/FLYWHEEL.md" target="_blank" rel="noopener" style="color:var(--accent-ink);font-family:var(--mono);font-size:14px">Read the full FLYWHEEL.md on GitHub →</a></p>
     <p style="margin-top:24px"><b style="color:var(--heading)">Humans stay in the loop.</b> <span style="color:var(--muted)">A flywheel is not "run unattended forever." It says exactly where a human gates a stage and the agent pauses for feedback, then resumes when you reply. A CLI, a model, and a web service each get a different loop and different gates.</span></p>

@@ -2,7 +2,7 @@
 
 **Your project's loop for shipping and improving software, with humans in the loop where it matters.**
 
-The third file in the agent canon: `AGENTS.md` says what to do, `SOUL.md` says who to be, `FLYWHEEL.md` says how a change travels from idea to shipped to improved, turn after turn.
+A companion to `AGENTS.md` and `SOUL.md`: `AGENTS.md` says what to do, `SOUL.md` says who to be, `FLYWHEEL.md` says how a change travels from idea to shipped to improved, turn after turn.
 
 ## What a flywheel is
 
@@ -12,25 +12,19 @@ This file is where you define that loop, so an agent follows your *process*, not
 
 ## The stages
 
-A change flows through stages. The set below is a starting point. Add, remove, and reorder to match how your project actually ships and evolves. For each stage, write two things:
+A change flows through four stages, the same four the wheel turns. The set below is the default. Split a stage (Ship is really plan, build, and review), add, remove, or reorder to match how your project actually ships and evolves. For each stage, write two things:
 
 - **Done when:** the exit criteria, so the agent knows when to move on.
 - **Gate:** does the agent proceed on its own, or stop and wait for a human?
 
-1. **Plan.** Restate the goal, propose the approach, name the blast radius.
-   - *Done when:* the plan and the risks are written down.
-   - *Gate (human):* wait for a sign-off on anything risky, irreversible, or ambiguous.
-2. **Build.** Make the change in small, reversible steps.
-   - *Done when:* it runs and the diff is self-contained.
-3. **Review.** Read your own diff, run tests and linters, trace the data flow.
-   - *Gate (optional):* a human or a second agent reviews before merge.
-4. **Ship.** Merge, release, deploy. Land the whole chain, not just the merge.
+1. **Ship.** Plan the approach and name the blast radius, build in small reversible steps, review your own diff, tests, and data flow, then merge, release, and deploy. Land the whole chain, not just the merge.
    - *Done when:* the change is live where users are.
-5. **Verify.** Prove it works in production, by you, with evidence: a screenshot, a real request, real output.
-   - *Done when:* you have seen it work for real. A synthetic pass is not proof.
-6. **Learn.** Capture what actually happened: cost, regressions, the surprise, user feedback.
+   - *Gate (human):* sign off before anything risky or irreversible, and optionally review before merge.
+2. **Verify.** Prove it works in production, by you, with evidence: a real request, a screenshot, real output.
+   - *Done when:* you have seen it work for real. A passing test is not proof.
+3. **Learn.** Capture what actually happened: cost, regressions, the surprise, user feedback.
    - *Gate (often):* wait for real-world signal before starting the next turn.
-7. **Improve.** Feed it back: fix the cause, raise the bar, delete the toil.
+4. **Improve.** Feed it back: fix the cause, raise the bar, delete the toil.
    - *Done when:* the next turn starts smarter than this one did.
 
 ## Humans stay in the loop
@@ -39,7 +33,7 @@ A flywheel is not "let the agent run unattended forever." It makes explicit *whe
 
 ## What makes it compound
 
-The difference between a flywheel and a checklist: **Learn** feeds the next **Plan**. Cost data, regressions, and feedback become the context that makes the next change faster and safer. Leave a trail so the wheel comes around heavier each turn.
+The difference between a flywheel and a checklist: **Learn** feeds the next **turn**. Cost data, regressions, and feedback become the context that makes the next change faster and safer. Leave a trail so the wheel comes around heavier each turn.
 
 ## The bar (holds at every stage)
 
