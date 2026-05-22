@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-110 -110 220 220" width="220" height="220">
+  <circle r="92" fill="none" stroke="#eef1f4" stroke-width="15"/>
+  <circle r="99.5" fill="none" stroke="#0a0a0a" stroke-width="2.5"/>
+  <circle r="84.5" fill="none" stroke="#0a0a0a" stroke-width="2.5"/>
+  <g stroke="#9aa1ad" stroke-width="6" stroke-linecap="round">
+    <line x1="0" y1="0" x2="73" y2="42"/>
+    <line x1="0" y1="0" x2="-73" y2="42"/>
+    <line x1="0" y1="0" x2="73" y2="-42"/>
+    <line x1="0" y1="0" x2="-73" y2="-42"/>
+    <line x1="0" y1="0" x2="0" y2="84"/>
+  </g>
+  <line x1="0" y1="0" x2="0" y2="-84" stroke="#FF6A1A" stroke-width="6" stroke-linecap="round"/>
+  <g fill="#FF6A1A">
+    <circle cx="0" cy="-57" r="4.5"/>
+    <circle cx="49" cy="29" r="4.5"/>
+    <circle cx="-49" cy="29" r="4.5"/>
+    <circle cx="49" cy="-29" r="4.5"/>
+    <circle cx="-49" cy="-29" r="4.5"/>
+    <circle cx="0" cy="57" r="4.5"/>
+  </g>
+  <circle r="19" fill="#ffffff" stroke="#0a0a0a" stroke-width="3"/>
+  <circle r="6" fill="#FF6A1A"/>
+</svg>
