@@ -283,6 +283,7 @@ Ship, verify, learn, improve. Each turn compounds.
     <h2>Writing code was never the hard part.</h2>
     <p class="lead">Agents can write code all day. The hard part is everything after: does it actually work, in production, for a real person? <b>And can you prove it?</b></p>
     <p>That's the loop: <b>ship → verify → learn → improve.</b> Run it with discipline and software starts improving itself, safely. Run it without and you get confident, untested, unobservable change, at machine speed. The question under every autonomous codebase: <b>what happens when the loop closes without a human in it?</b></p>
+    <p>This isn't theoretical. When agentic coding became the default inside Anthropic's own Claude Code org, the bottleneck moved: coding stopped being the slow part, and verification, review, and ownership became it. The old norms quietly stopped working and had to be rewritten to keep shipping (<a href="https://www.youtube.com/watch?v=IA5LWIGqnyM" target="_blank" rel="noopener" style="color:var(--accent-ink)">Fiona Fung, Code w/ Claude 2026</a>). FLYWHEEL.md is where you write the new ones down.</p>
     <div class="canon-table">
       <div class="canon-row"><span class="f">AGENTS.md</span><span class="d">what to do (the project's instructions)</span></div>
       <div class="canon-row"><span class="f">SOUL.md</span><span class="d">who to be (the agent's identity)</span></div>
@@ -299,12 +300,12 @@ Ship, verify, learn, improve. Each turn compounds.
     <p>Three things to read here: the <b>stages</b> (the steps a change travels), the <b>gates</b> (where a human stays in control), and <a href="#bar" style="color:var(--accent-ink)">the bar</a> (the rules that hold at every stage).</p>
     <div class="stages">
       <div class="srow"><div class="sn">01</div><div><h3>Ship</h3><p>Plan the approach and name the blast radius, build in small reversible steps, review your own diff, tests, and data flow, then merge, release, and deploy. Land the whole chain, not just the merge.</p><div class="meta"><span class="done">Done when: the change is live where users are.</span><span class="gate">Gate: a human signs off before anything risky or irreversible, and optionally reviews before merge.</span></div></div></div>
-      <div class="srow"><div class="sn">02</div><div><h3>Verify</h3><p>Prove it works in production, by you, with evidence: a real request, a screenshot, real output.</p><div class="meta"><span class="done">Done when: you have seen it work for real. Passing tests are not the same as proof.</span></div></div></div>
+      <div class="srow"><div class="sn">02</div><div><h3>Verify</h3><p>Prove it works in production, by you, with evidence: a real request, a screenshot, real output. Better yet, automation that catches it before you or a user does.</p><div class="meta"><span class="done">Done when: you have seen it work for real. Passing tests are not the same as proof.</span></div></div></div>
       <div class="srow"><div class="sn">03</div><div><h3>Learn</h3><p>Capture what actually happened: cost, regressions, the surprise, user feedback.</p><div class="meta"><span class="done">Done when: you know what this turn really cost and changed.</span><span class="gate">Gate (often): wait for real-world signal before the next turn.</span></div></div></div>
       <div class="srow"><div class="sn">04</div><div><h3>Improve</h3><p>Fix the cause, raise the bar, delete the toil.</p><div class="meta"><span class="done">Done when: the next turn starts smarter than this one did.</span></div></div></div>
     </div>
     <p style="margin-top:20px"><a href="https://github.com/vivekchand/flywheel.md/blob/main/FLYWHEEL.md" target="_blank" rel="noopener" style="color:var(--accent-ink);font-family:var(--mono);font-size:14px">Read the full FLYWHEEL.md on GitHub →</a></p>
-    <p style="margin-top:24px"><b style="color:var(--heading)">Humans stay in the loop.</b> <span style="color:var(--muted)">A flywheel is not "run unattended forever." It says exactly where a human gates a stage and the agent pauses for feedback, then resumes when you reply. A CLI, a model, and a web service each get a different loop and different gates.</span></p>
+    <p style="margin-top:24px"><b style="color:var(--heading)">Humans stay in the loop.</b> <span style="color:var(--muted)">A flywheel is not "run unattended forever." It says exactly where a human gates a stage and the agent pauses for feedback, then resumes when you reply. Put the gates where human judgment still wins: risk and trust boundaries, irreversible changes, legal, and product taste. A CLI, a model, and a web service each get a different loop and different gates.</span></p>
   </div>
 </section>
 
@@ -318,7 +319,8 @@ Ship, verify, learn, improve. Each turn compounds.
       <li><div><h4>Every iteration costs money.</h4><span>Each poll, each fetch, each run is spend. Treat request volume like a budget you can blow, because you can.</span></div></li>
       <li><div><h4>Know your data flow.</h4><span>"Works on my machine" is the most expensive lie an agent tells. Trace the path from source to screen before you trust it.</span></div></li>
       <li><div><h4>Fix the cause, never the symptom.</h4><span>No skipping a check to go green. No bypassing the guard to make the error disappear. Find the root, or you'll meet it again.</span></div></li>
-      <li><div><h4>Leave a trail.</h4><span>The next turn of the loop shouldn't relearn what this one did. Write down the non-obvious: the gotcha, the constraint, the why.</span></div></li>
+      <li><div><h4>Leave a trail, in the codebase.</h4><span>The next turn shouldn't relearn what this one did. Write down the non-obvious: the gotcha, the constraint, the why. Keep it in the repo, next to the code, where it stays in the loop. A doc that lives outside the loop rots.</span></div></li>
+      <li><div><h4>Audit the loop. Kill what stopped serving its purpose.</h4><span>Processes pile up; nobody deletes them. Every few turns, ask of each stage and gate: is it still earning its place? Building is cheap now, so prune hard. A loop you never trim becomes the bottleneck it was meant to remove.</span></div></li>
     </ul>
   </div>
 </section>
