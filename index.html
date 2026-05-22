@@ -4,14 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>FLYWHEEL.md: how agents ship</title>
-<meta name="description" content="The open format for how autonomous agents ship and improve real software. Ship → verify → learn → improve. The third file in the agent canon." />
+<meta name="description" content="How your AI coding agents ship real software, and prove it works. FLYWHEEL.md is one Markdown file in your repo, the third file in the agent canon, after AGENTS.md and SOUL.md." />
 <meta property="og:title" content="FLYWHEEL.md: how agents ship" />
 <meta property="og:description" content="AGENTS.md says what to do. SOUL.md says who to be. FLYWHEEL.md says how to ship, and how to know you did." />
 <meta property="og:url" content="https://flywheel.md/" />
 <meta property="og:image" content="https://flywheel.md/og-card.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="FLYWHEEL.md: how agents ship" />
-<meta name="twitter:description" content="The open format for how autonomous agents ship and improve real software." />
+<meta name="twitter:description" content="How your AI coding agents ship real software, and prove it works. One Markdown file in your repo." />
 <meta name="twitter:image" content="https://flywheel.md/og-card.png" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -59,6 +59,9 @@
   h1{font-size:clamp(46px,8vw,76px);font-weight:600;letter-spacing:-0.035em;line-height:1.02;color:var(--heading)}
   h1 .md{color:var(--line2);font-weight:500}
   .tagline{margin-top:20px;font-size:clamp(18px,2.2vw,21px);color:var(--muted);max-width:30ch;line-height:1.5}
+  .subtag{margin-top:18px;font-size:16px;color:var(--muted);max-width:50ch;line-height:1.62}
+  .subtag b{color:var(--heading);font-weight:600}
+  .subtag i{font-style:normal;color:var(--accent-ink);font-weight:600}
   .canon{margin-top:24px;font-family:var(--mono);font-size:13.5px;color:var(--faint);line-height:1.95}
   .canon b{color:var(--heading);font-weight:500}
   .canon .you{color:var(--accent-ink)}
@@ -171,10 +174,10 @@
       <span><b>FLYWHEEL</b><span class="md">.md</span></span>
     </a>
     <div class="navlinks">
+      <a href="#get">The file</a>
       <a href="#why">Why</a>
       <a href="#loop">The loop</a>
       <a href="#bar">The bar</a>
-      <a href="#get">Get it</a>
       <a class="gh" href="https://github.com/vivekchand/flywheel.md" target="_blank" rel="noopener">GitHub ↗</a>
     </div>
   </nav>
@@ -186,15 +189,11 @@
     <div>
       <span class="eyebrow">The third file in the agent canon</span>
       <h1>FLYWHEEL<span class="md">.md</span></h1>
-      <p class="tagline">The open format for how autonomous agents ship and improve real software.</p>
-      <div class="canon">
-        <b>AGENTS.md</b> says what to do.<br>
-        <b>SOUL.md</b> says who to be.<br>
-        <b>FLYWHEEL.md</b> says how to ship<span class="you">, and how to know you did.</span>
-      </div>
+      <p class="tagline">How your AI coding agents ship real software, and prove it works.</p>
+      <p class="subtag">One Markdown file in your repo. <b>AGENTS.md</b> says <i>what</i> to build. <b>FLYWHEEL.md</b> is the playbook for <i>how</i> it ships: build it, prove it in production, learn, improve, with a human in the loop where it counts.</p>
       <div class="cta">
-        <a class="btn btn-primary" href="#loop">Read the manifesto <span class="arr">→</span></a>
-        <a class="btn btn-ghost" href="https://github.com/vivekchand/flywheel.md" target="_blank" rel="noopener">View on GitHub <span class="arr">↗</span></a>
+        <a class="btn btn-primary" href="#loop">See how it works <span class="arr">→</span></a>
+        <a class="btn btn-ghost" href="#get">Get the file <span class="arr">↓</span></a>
       </div>
     </div>
     <div class="wheelwrap">
@@ -223,60 +222,11 @@
   </div>
 </div>
 
-<section id="why">
-  <div class="wrap">
-    <div class="kicker">Why this file exists</div>
-    <h2>Writing code was never the hard part.</h2>
-    <p class="lead">Agents can write code all day. The hard part is everything after: does it actually work, in production, for a real person? <b>And can you prove it?</b></p>
-    <p>That's the loop: <b>ship → verify → learn → improve.</b> Run it with discipline and software starts improving itself, safely. Run it without and you get confident, untested, unobservable change, at machine speed. The question under every autonomous codebase: <b>what happens when the loop closes without a human in it?</b></p>
-    <div class="canon-table">
-      <div class="canon-row"><span class="f">AGENTS.md</span><span class="d">what to do (the project's instructions)</span></div>
-      <div class="canon-row"><span class="f">SOUL.md</span><span class="d">who to be (the agent's identity)</span></div>
-      <div class="canon-row here"><span class="f">FLYWHEEL.md</span><span class="d">how to ship, and how to know you did</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="loop">
-  <div class="wrap">
-    <div class="kicker">The loop</div>
-    <h2>The stages a change travels.</h2>
-    <p class="lead">This is what is inside <span class="mono">FLYWHEEL.md</span>: the stages a change moves through, each with its exit criteria and, where it matters, a gate where the agent stops for a human. Ship to Improve (the wheel above) is the compounding core; the full default set is below. Rename, add, or remove to fit how you ship.</p>
-    <div class="stages">
-      <div class="srow"><div class="sn">01</div><div><h3>Plan</h3><p>Restate the goal, propose the approach, name the blast radius.</p><div class="meta"><span class="done">Done when: the plan and the risks are written down.</span><span class="gate">Gate: a human signs off on anything risky, irreversible, or ambiguous.</span></div></div></div>
-      <div class="srow"><div class="sn">02</div><div><h3>Build</h3><p>Make the change in small, reversible steps.</p><div class="meta"><span class="done">Done when: it runs and the diff is self-contained.</span></div></div></div>
-      <div class="srow"><div class="sn">03</div><div><h3>Review</h3><p>Read your own diff, run tests and linters, trace the data flow.</p><div class="meta"><span class="gate">Gate (optional): a human or a second agent reviews before merge.</span></div></div></div>
-      <div class="srow"><div class="sn">04</div><div><h3>Ship</h3><p>Merge, release, deploy. Land the whole chain, not just the merge.</p><div class="meta"><span class="done">Done when: the change is live where users are.</span></div></div></div>
-      <div class="srow"><div class="sn">05</div><div><h3>Verify</h3><p>Prove it works in production, by you, with evidence: a screenshot, a real request, real output.</p><div class="meta"><span class="done">Done when: you have seen it work for real. A synthetic pass is not proof.</span></div></div></div>
-      <div class="srow"><div class="sn">06</div><div><h3>Learn</h3><p>Capture what actually happened: cost, regressions, the surprise, user feedback.</p><div class="meta"><span class="gate">Gate (often): wait for real-world signal before the next turn.</span></div></div></div>
-      <div class="srow"><div class="sn">07</div><div><h3>Improve</h3><p>Fix the cause, raise the bar, delete the toil.</p><div class="meta"><span class="done">Done when: the next turn starts smarter than this one did.</span></div></div></div>
-    </div>
-    <p style="margin-top:20px"><a href="https://github.com/vivekchand/flywheel.md/blob/main/FLYWHEEL.md" target="_blank" rel="noopener" style="color:var(--accent-ink);font-family:var(--mono);font-size:14px">Read the full FLYWHEEL.md on GitHub →</a></p>
-    <p style="margin-top:24px"><b style="color:var(--heading)">Humans stay in the loop.</b> <span style="color:var(--muted)">A flywheel is not "run unattended forever." It says exactly where a human gates a stage and the agent pauses for feedback, then resumes when you reply. A CLI, a model, and a web service each get a different loop and different gates.</span></p>
-  </div>
-</section>
-
-<section id="bar">
-  <div class="wrap">
-    <div class="kicker">Principles</div>
-    <h2>A few rules that hold every turn.</h2>
-    <p class="lead">The loop is the shape of your process. These don't change between stages, whatever stages you choose.</p>
-    <ul class="bar">
-      <li><div><h4>Done means deployed and verified, with evidence.</h4><span>A diagnosis is not a fix. A merge is not a deploy. A deploy is not a verification. Land the whole chain, then say done.</span></div></li>
-      <li><div><h4>Every iteration costs money.</h4><span>Each poll, each fetch, each run is spend. Treat request volume like a budget you can blow, because you can.</span></div></li>
-      <li><div><h4>Know your data flow.</h4><span>"Works on my machine" is the most expensive lie an agent tells. Trace the path from source to screen before you trust it.</span></div></li>
-      <li><div><h4>Fix the cause, never the symptom.</h4><span>No skipping a check to go green. No bypassing the guard to make the error disappear. Find the root, or you'll meet it again.</span></div></li>
-      <li><div><h4>Leave a trail.</h4><span>The next turn of the loop shouldn't relearn what this one did. Write down the non-obvious: the gotcha, the constraint, the why.</span></div></li>
-    </ul>
-  </div>
-</section>
-
 <section id="get">
   <div class="wrap">
-    <div class="kicker">Adopt it</div>
-    <h2>It's just a file.</h2>
-    <p>Drop <b>FLYWHEEL.md</b> in your repo root, next to <span class="mono">AGENTS.md</span> and <span class="mono">SOUL.md</span>. Your agents read it before they touch anything. Steal it, fork it, make it yours. No attribution needed.</p>
-    <p style="margin-top:14px;color:var(--muted)">New to it? Browse <a href="https://github.com/vivekchand/flywheel.md/tree/main/examples" target="_blank" rel="noopener" style="color:var(--accent-ink)">example flywheels</a> for CLIs, libraries, services, frontends, and ML projects.</p>
+    <div class="kicker">The file</div>
+    <h2>It's just a Markdown file.</h2>
+    <p class="lead">Here is the whole thing. Drop it in your repo root, next to <span class="mono">AGENTS.md</span> and <span class="mono">SOUL.md</span>, and your agents read it before they touch anything. Copy this starter, then make it yours.</p>
     <div class="code">
       <div class="top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="margin-left:6px">FLYWHEEL.md</span><button id="copybtn" class="copybtn" onclick="copyFlywheel()" aria-label="Copy FLYWHEEL.md">Copy</button></div>
       <pre id="flywheel-src"># FLYWHEEL.md
@@ -303,12 +253,61 @@ Ship, verify, learn, improve. Each turn compounds.
 - Fix the cause, never the symptom.
 - Leave a trail.</pre>
     </div>
-    <div class="cta" style="margin-top:24px">
+    <p style="margin-top:18px;color:var(--muted)">New to it? Browse <a href="https://github.com/vivekchand/flywheel.md/tree/main/examples" target="_blank" rel="noopener" style="color:var(--accent-ink)">example flywheels</a> for CLIs, libraries, services, frontends, and ML projects. Steal it, fork it, no attribution needed.</p>
+    <div class="cta" style="margin-top:22px">
       <a class="btn btn-primary" href="https://github.com/vivekchand/flywheel.md" target="_blank" rel="noopener">Fork the file <span class="arr">↗</span></a>
     </div>
   </div>
 </section>
 
+<section id="why">
+  <div class="wrap">
+    <div class="kicker">Why this file exists</div>
+    <h2>Writing code was never the hard part.</h2>
+    <p class="lead">Agents can write code all day. The hard part is everything after: does it actually work, in production, for a real person? <b>And can you prove it?</b></p>
+    <p>That's the loop: <b>ship → verify → learn → improve.</b> Run it with discipline and software starts improving itself, safely. Run it without and you get confident, untested, unobservable change, at machine speed. The question under every autonomous codebase: <b>what happens when the loop closes without a human in it?</b></p>
+    <div class="canon-table">
+      <div class="canon-row"><span class="f">AGENTS.md</span><span class="d">what to do (the project's instructions)</span></div>
+      <div class="canon-row"><span class="f">SOUL.md</span><span class="d">who to be (the agent's identity)</span></div>
+      <div class="canon-row here"><span class="f">FLYWHEEL.md</span><span class="d">how to ship, and how to know you did</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="loop">
+  <div class="wrap">
+    <div class="kicker">The loop</div>
+    <h2>The stages a change travels.</h2>
+    <p class="lead">This is what's inside <span class="mono">FLYWHEEL.md</span>: the stages a change moves through. Each stage has a finish line, and some have a <b>gate</b>, a point where the agent stops and waits for a human before going on. The seven below are a starting point. Rename, add, or remove them to match how your team ships.</p>
+    <p>Three things to read here: the <b>stages</b> (the steps a change travels), the <b>gates</b> (where a human stays in control), and <a href="#bar" style="color:var(--accent-ink)">the bar</a> (the rules that hold at every stage).</p>
+    <div class="stages">
+      <div class="srow"><div class="sn">01</div><div><h3>Plan</h3><p>Restate the goal, propose the approach, name the blast radius.</p><div class="meta"><span class="done">Done when: the plan and the risks are written down.</span><span class="gate">Gate: a human signs off on anything risky, irreversible, or ambiguous.</span></div></div></div>
+      <div class="srow"><div class="sn">02</div><div><h3>Build</h3><p>Make the change in small, reversible steps.</p><div class="meta"><span class="done">Done when: it runs and the diff is self-contained.</span></div></div></div>
+      <div class="srow"><div class="sn">03</div><div><h3>Review</h3><p>Read your own diff, run tests and linters, trace the data flow.</p><div class="meta"><span class="gate">Gate (optional): a human or a second agent reviews before merge.</span></div></div></div>
+      <div class="srow"><div class="sn">04</div><div><h3>Ship</h3><p>Merge, release, deploy. Land the whole chain, not just the merge.</p><div class="meta"><span class="done">Done when: the change is live where users are.</span></div></div></div>
+      <div class="srow"><div class="sn">05</div><div><h3>Verify</h3><p>Prove it works in production, by you, with evidence: a screenshot, a real request, real output.</p><div class="meta"><span class="done">Done when: you have seen it work for real. Passing tests are not the same as proof.</span></div></div></div>
+      <div class="srow"><div class="sn">06</div><div><h3>Learn</h3><p>Capture what actually happened: cost, regressions, the surprise, user feedback.</p><div class="meta"><span class="gate">Gate (often): wait for real-world signal before the next turn.</span></div></div></div>
+      <div class="srow"><div class="sn">07</div><div><h3>Improve</h3><p>Fix the cause, raise the bar, delete the toil.</p><div class="meta"><span class="done">Done when: the next turn starts smarter than this one did.</span></div></div></div>
+    </div>
+    <p style="margin-top:20px"><a href="https://github.com/vivekchand/flywheel.md/blob/main/FLYWHEEL.md" target="_blank" rel="noopener" style="color:var(--accent-ink);font-family:var(--mono);font-size:14px">Read the full FLYWHEEL.md on GitHub →</a></p>
+    <p style="margin-top:24px"><b style="color:var(--heading)">Humans stay in the loop.</b> <span style="color:var(--muted)">A flywheel is not "run unattended forever." It says exactly where a human gates a stage and the agent pauses for feedback, then resumes when you reply. A CLI, a model, and a web service each get a different loop and different gates.</span></p>
+  </div>
+</section>
+
+<section id="bar">
+  <div class="wrap">
+    <div class="kicker">Principles</div>
+    <h2>A few rules that hold every turn.</h2>
+    <p class="lead">The loop is the shape of your process. These don't change between stages, whatever stages you choose.</p>
+    <ul class="bar">
+      <li><div><h4>Done means deployed and verified, with evidence.</h4><span>A diagnosis is not a fix. A merge is not a deploy. A deploy is not a verification. Land the whole chain, then say done.</span></div></li>
+      <li><div><h4>Every iteration costs money.</h4><span>Each poll, each fetch, each run is spend. Treat request volume like a budget you can blow, because you can.</span></div></li>
+      <li><div><h4>Know your data flow.</h4><span>"Works on my machine" is the most expensive lie an agent tells. Trace the path from source to screen before you trust it.</span></div></li>
+      <li><div><h4>Fix the cause, never the symptom.</h4><span>No skipping a check to go green. No bypassing the guard to make the error disappear. Find the root, or you'll meet it again.</span></div></li>
+      <li><div><h4>Leave a trail.</h4><span>The next turn of the loop shouldn't relearn what this one did. Write down the non-obvious: the gotcha, the constraint, the why.</span></div></li>
+    </ul>
+  </div>
+</section>
 <section class="finale">
   <div class="wrap">
     <div class="kicker">The other half</div>
