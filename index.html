@@ -61,9 +61,20 @@
   .btn .arr{transition:transform .15s}.btn:hover .arr{transform:translateX(2px)}
 
   /* hero flywheel (rotating brand hook) */
-  .wheelwrap{width:300px;height:300px;display:grid;place-items:center}
-  @media(max-width:760px){.wheelwrap{width:200px;height:200px;justify-self:start;margin-top:4px}}
-  #wheel{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 14px 26px rgba(10,10,10,0.07))}
+  .wheelwrap{width:400px;height:400px;position:relative;display:grid;place-items:center}
+  @media(max-width:900px){.wheelwrap{width:320px;height:320px}}
+  @media(max-width:760px){.wheelwrap{width:210px;height:210px;justify-self:start;margin-top:4px}}
+  #wheel{width:260px;height:260px;overflow:visible;filter:drop-shadow(0 14px 26px rgba(10,10,10,0.07))}
+  @media(max-width:900px){#wheel{width:240px;height:240px}}
+  @media(max-width:760px){#wheel{width:100%;height:100%}}
+  /* loop-stage labels around the wheel (wide screens) */
+  .stage{position:absolute;display:none;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--heading);font-weight:500;white-space:nowrap;line-height:1.3}
+  .stage .n{display:block;color:var(--accent-ink);font-size:10px;letter-spacing:.08em;margin-bottom:3px}
+  .stage.s1{top:8px;left:50%;transform:translateX(-50%);text-align:center}
+  .stage.s2{right:6px;top:50%;transform:translateY(-50%);text-align:right}
+  .stage.s3{bottom:8px;left:50%;transform:translateX(-50%);text-align:center}
+  .stage.s4{left:6px;top:50%;transform:translateY(-50%);text-align:left}
+  @media(min-width:901px){.stage{display:block}}
   #wheel .band{fill:none;stroke:#eef1f4;stroke-width:15}
   #wheel .rim{fill:none;stroke:var(--heading);stroke-width:2.2}
   #wheel .spk{stroke:#9aa1ad;stroke-width:5;stroke-linecap:round}
@@ -181,6 +192,10 @@
           <circle class="hubdot" r="6"/>
         </g>
       </svg>
+      <div class="stage s1"><span class="n">01</span>Ship</div>
+      <div class="stage s2"><span class="n">02</span>Verify</div>
+      <div class="stage s3"><span class="n">03</span>Learn</div>
+      <div class="stage s4"><span class="n">04</span>Improve</div>
     </div>
   </div>
 </div>
