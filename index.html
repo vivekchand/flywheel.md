@@ -151,6 +151,10 @@
   .code .top .copybtn{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--muted);background:#fff;border:1px solid var(--line2);border-radius:6px;padding:3px 11px;cursor:pointer;transition:.15s}
   .code .top .copybtn:hover{border-color:var(--faint);color:var(--heading)}
   .code pre{white-space:pre-wrap}
+  .code .md-h{color:var(--heading);font-weight:600}
+  .code .md-hmark{color:#b8c0ca;font-weight:400}
+  .code .md-mark{color:#9aa1ad}
+  .code .md-code{background:#e8ecf1;border:1px solid #d7dde5;border-radius:5px;padding:1px 5px;color:var(--heading)}
 
   /* finale */
   .finale{background:var(--soft);border-top:1px solid var(--line)}
@@ -232,7 +236,7 @@
       <pre id="flywheel-src"># FLYWHEEL.md
 
 How an agent ships and improves this project, turn by turn.
-AGENTS.md = what to do. SOUL.md = who to be. FLYWHEEL.md = how to ship.
+`AGENTS.md` = what to do. `SOUL.md` = who to be. `FLYWHEEL.md` = how to ship.
 
 ## The loop
 Ship, verify, learn, improve. Each turn compounds.
@@ -332,14 +336,30 @@ Ship, verify, learn, improve. Each turn compounds.
 </footer>
 
 <script>
+var FLYWHEEL_SRC="";
 function copyFlywheel(){
-  var el=document.getElementById('flywheel-src'); if(!el) return;
-  var txt=el.innerText;
+  var el=document.getElementById('flywheel-src');
+  var txt=FLYWHEEL_SRC||(el?el.innerText:"");
   var done=function(){var b=document.getElementById('copybtn'); if(b){var o=b.textContent; b.textContent='Copied'; setTimeout(function(){b.textContent=o;},1800);}};
   var fallback=function(){var t=document.createElement('textarea'); t.value=txt; t.style.position='fixed'; t.style.opacity='0'; document.body.appendChild(t); t.select(); try{document.execCommand('copy'); done();}catch(e){} document.body.removeChild(t);};
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,fallback);}else{fallback();}
 }
 (function(){
+  // markdown syntax highlight for the file card (keeps raw text for copy)
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function inlineCode(s){return s.replace(/`([^`]+)`/g,'<span class="md-code">`$1`</span>');}
+  function hlMarkdown(raw){
+    return raw.split('\n').map(function(line){
+      var h=line.match(/^(#{1,6})(\s+)(.*)$/);
+      if(h){return '<span class="md-h"><span class="md-hmark">'+h[1]+'</span>'+h[2]+inlineCode(esc(h[3]))+'</span>';}
+      var li=line.match(/^(\s*)([-*]|\d+\.)(\s+)(.*)$/);
+      if(li){return li[1]+'<span class="md-mark">'+esc(li[2])+'</span>'+li[3]+inlineCode(esc(li[4]));}
+      return inlineCode(esc(line));
+    }).join('\n');
+  }
+  var fsrc=document.getElementById('flywheel-src');
+  if(fsrc){FLYWHEEL_SRC=fsrc.textContent; fsrc.innerHTML=hlMarkdown(FLYWHEEL_SRC);}
+
   var svgns="http://www.w3.org/2000/svg";
   var teeth=document.querySelector("#wheel .teeth");
   var bolts=document.querySelector("#wheel .bolts");
