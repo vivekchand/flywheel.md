@@ -4,5 +4,8 @@ Illustrative `FLYWHEEL.md` files for common project archetypes. These are starti
 
 - [`cli-tool.md`](./cli-tool.md) — command-line tools
 - [`library.md`](./library.md) — libraries and SDKs
+- [`web-service.md`](./web-service.md) — web services and APIs
+- [`frontend-app.md`](./frontend-app.md) — frontends and web apps
+- [`ml-project.md`](./ml-project.md) — machine-learning and data projects
 
 The idea, in full, lives at [flywheel.md](https://flywheel.md). Want an archetype that isn't here yet? Open an issue or a PR.
