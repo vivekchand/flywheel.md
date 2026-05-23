@@ -12,6 +12,8 @@ This file is where you define that loop, so an agent follows your *process*, not
 
 Why now: when agents write the code, coding stops being the bottleneck. Verification, review, and ownership become it, and the processes built to protect scarce engineering time quietly stop working. This file is where you rewrite them.
 
+Another way to see it: a company without this loop is an open-loop control system. Decisions go out, signal comes back lossy and late, error compounds, the system drifts. With agents in the work, the drift is at machine speed. A flywheel is the closed loop: tight feedback into the next turn, so error stays in check.
+
 ## The stages
 
 A change flows through four stages, the same four the wheel turns. The set below is the default. Split a stage (Ship is really plan, build, and review), add, remove, or reorder to match how your project actually ships and evolves. For each stage, write two things:
@@ -22,7 +24,7 @@ A change flows through four stages, the same four the wheel turns. The set below
 1. **Ship.** Plan the approach and name the blast radius, build in small reversible steps, review your own diff, tests, and data flow, then merge, release, and deploy. Land the whole chain, not just the merge.
    - *Done when:* the change is live where users are.
    - *Gate (human):* sign off before anything risky or irreversible, and optionally review before merge.
-2. **Verify.** Prove it works in production, by you, with evidence: a real request, a screenshot, real output.
+2. **Verify.** Prove it works in production, by you, with evidence: a real request, a screenshot, real output. Your evidence is your eval, the one you trust for your product, not a generic leaderboard.
    - *Done when:* you have seen it work for real. A passing test is not proof.
 3. **Learn.** Capture what actually happened: cost, regressions, the surprise, user feedback.
    - *Gate (often):* wait for real-world signal before starting the next turn.
@@ -31,7 +33,7 @@ A change flows through four stages, the same four the wheel turns. The set below
 
 ## Humans stay in the loop
 
-A flywheel is not "let the agent run unattended forever." It makes explicit *where* a human stays in the loop: which stages need a sign-off, and where the agent pauses for feedback and resumes when you reply. Mark those gates. Put them where human judgment still wins: risk and trust boundaries, irreversible changes, legal, and product taste. Everything between them, the agent turns on its own. Loosen the gates as trust grows; tighten them for risky surfaces.
+A flywheel is not "let the agent run unattended forever." It makes explicit *where* a human stays in the loop: which stages need a sign-off, and where the agent pauses for feedback and resumes when you reply. Mark those gates. Put them where human judgment still wins: risk and trust boundaries, irreversible changes, legal, and product taste. Keep the gates themselves deterministic, written as code your CI runs, not as instructions the agent grades itself on. The agent's work between gates is latent; the gates and the evidence are not. Everything between them, the agent turns on its own. Loosen the gates as trust grows; tighten them for risky surfaces.
 
 ## What makes it compound
 
