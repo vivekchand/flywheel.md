@@ -163,6 +163,13 @@
   .code .md-mark{color:#9aa1ad}
   .code .md-code{background:#e8ecf1;border:1px solid #d7dde5;border-radius:5px;padding:1px 5px;color:var(--heading)}
 
+  /* faq */
+  .faq{margin-top:26px;border-top:1px solid var(--line)}
+  .faq-item{padding:20px 0;border-bottom:1px solid var(--line)}
+  .faq-item h3{font-size:17px;font-weight:600;color:var(--heading)}
+  .faq-item p{margin-top:7px;color:var(--muted);font-size:15px;line-height:1.55;max-width:64ch}
+  .faq-item p b{color:var(--heading);font-weight:600}
+
   /* finale */
   .finale{background:var(--soft);border-top:1px solid var(--line)}
   .finale .punch{margin-top:22px;font-size:clamp(18px,2.4vw,22px);font-weight:600;color:var(--heading)}
@@ -215,31 +222,23 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What is FLYWHEEL.md?",
+          "name": "Does an agent read FLYWHEEL.md automatically?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "FLYWHEEL.md is a single Markdown file you put in your repo root, next to AGENTS.md, that defines the loop your AI coding agents follow to ship a change, prove it works in production, learn from it, and improve. It is context the agent reads before it acts, not a runtime or plugin."
+            "text": "No. Coding tools load AGENTS.md or CLAUDE.md, not an arbitrary file in your repo. Reference FLYWHEEL.md from there with one line, such as 'Follow the loop in ./FLYWHEEL.md for every change', and because that context file is auto-loaded, the loop travels with it for Claude Code, Cursor, Codex, and Gemini CLI. Claude Code can also import the whole file with @FLYWHEEL.md in CLAUDE.md."
           }
         },
         {
           "@type": "Question",
-          "name": "How is FLYWHEEL.md different from AGENTS.md and SOUL.md?",
+          "name": "Do I need all four stages?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "They are the agent-file canon. AGENTS.md says what to do, the project's instructions. SOUL.md says who to be, the agent's identity. FLYWHEEL.md says how to ship, and how to know you did: the process a change runs every turn."
+            "text": "No. Ship, Verify, Learn, and Improve are the default. Split a stage, add one, remove one, or reorder to match how your project actually ships. The shape is yours; the discipline is the point."
           }
         },
         {
           "@type": "Question",
-          "name": "What are the stages in a flywheel?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The four default stages are Ship, Verify, Learn, and Improve. Each stage names a Done-when exit criterion and an optional human Gate where the agent stops and waits for a person. You can split, add, remove, or reorder stages to match how your project ships."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does FLYWHEEL.md enforce the process?",
+          "name": "Is the process enforced?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "No. It is instructions an agent follows, like any other guidance, not hard enforcement. To make a gate actually block, wire the same rule into your CI. The file makes the intent explicit; your pipeline makes it binding."
@@ -247,10 +246,26 @@
         },
         {
           "@type": "Question",
-          "name": "How do I adopt FLYWHEEL.md?",
+          "name": "What if it conflicts with AGENTS.md?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Copy the starter file into your repo root next to AGENTS.md, then rewrite the stages and gates for your project. Agents that read project Markdown, such as Claude Code, Cursor, or Codex, pick it up as instructions. It is MIT licensed, free to copy and fork, with no attribution needed."
+            "text": "They do not compete. AGENTS.md says what to do, FLYWHEEL.md says how to ship it. An explicit prompt from you overrides both."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is this different from a definition-of-done checklist?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A checklist is a one-time gate you pass or fail. A flywheel is a loop: the Learn stage feeds the next turn, so each change starts smarter than the last. It compounds instead of resetting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I update it later?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Treat it as living documentation that lives in your repo, next to the code, in the loop. A doc that lives outside the loop rots."
           }
         }
       ]
@@ -270,9 +285,11 @@
     <div class="navlinks">
       <a href="#get">The file</a>
       <a href="#how">How it works</a>
+      <a href="#use">Adopt</a>
       <a href="#why">Why</a>
       <a href="#loop">The loop</a>
       <a href="#bar">The bar</a>
+      <a href="#faq">FAQ</a>
       <a class="gh" href="https://github.com/vivekchand/flywheel.md" target="_blank" rel="noopener">GitHub ↗</a>
     </div>
   </nav>
@@ -367,12 +384,33 @@ Ship, verify, learn, improve. Each turn compounds.
     <h2>Not a poster. Context your agent reads.</h2>
     <p class="lead">FLYWHEEL.md is not a wall poster or a checklist humans nod at. It is context your coding agent loads before it acts, the same way it reads AGENTS.md, and it changes what the agent does at every step.</p>
     <ul class="bar">
-      <li><div><h4>Your agent reads it first.</h4><span>Drop it in the repo root. Claude Code, Cursor, Codex, or any agent that reads project Markdown picks it up as instructions. No runtime, no plugin, no lock-in.</span></div></li>
+      <li><div><h4>Your agent reads it first.</h4><span>Drop it in your repo root, then point the file your agent already loads, AGENTS.md or CLAUDE.md, at it with one line (<a href="#use" style="color:var(--accent-ink)">how</a>). Claude Code, Cursor, or Codex then reads the loop as instructions. No runtime, no plugin, no lock-in.</span></div></li>
       <li><div><h4>Gates pause the run for you.</h4><span>At each stage you mark with a gate, the agent stops and waits for a human, then resumes when you reply. The human-in-the-loop, written down so the agent honors it.</span></div></li>
       <li><div><h4>"Done" demands evidence, not a claim.</h4><span>The agent can't close a stage by asserting success. It has to show proof, and proof is domain-specific: a real request plus an error-rate graph for a service; a screenshot, a Playwright run, or a Lighthouse score for a frontend; an eval on held-out data against the prod baseline for a model. See the <a href="https://github.com/vivekchand/flywheel.md/tree/main/examples" target="_blank" rel="noopener" style="color:var(--accent-ink)">per-stack examples</a>.</span></div></li>
       <li><div><h4>It's instructions, not magic.</h4><span>An agent follows FLYWHEEL.md like any other guidance. It isn't hard enforcement. Want a gate to actually block? Wire the same rule into CI. The file makes the intent explicit; your pipeline makes it binding.</span></div></li>
     </ul>
     <p style="margin-top:8px"><b style="color:var(--heading)">So why a file at all?</b> <span style="color:var(--muted)">You already have these steps. What's new is that an autonomous agent now runs them at machine speed. The gates and the evidence bar are what keep a closed loop from shipping confident, untested change while you sleep.</span></p>
+  </div>
+</section>
+
+<section id="use">
+  <div class="wrap">
+    <div class="kicker">Make it default context</div>
+    <h2>How agents actually load it.</h2>
+    <p class="lead">No tool reads a file named <span class="mono">FLYWHEEL.md</span> on its own. But every coding agent already loads <span class="mono">AGENTS.md</span> (or its own <span class="mono">CLAUDE.md</span>, <span class="mono">.cursor/rules</span>, <span class="mono">GEMINI.md</span>). So you don't wire up a new file per tool. You point the file they already read at this one. One line, and the loop rides in with it.</p>
+    <div class="code">
+      <div class="top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="margin-left:6px">AGENTS.md</span><button id="copyuse" class="copybtn" onclick="copyUse()" aria-label="Copy the snippet">Copy</button></div>
+      <pre id="use-src"><span class="md-h"><span class="md-hmark">##</span> Process</span>
+Follow the loop in <span class="md-code">./FLYWHEEL.md</span> for every change.
+Don't mark a stage done without the evidence it requires.
+Stop at any gate marked (human) and wait for a person.</pre>
+    </div>
+    <p style="margin-top:18px">Paste that into the context file your agent already reads. Because that file is auto-loaded, <span class="mono">FLYWHEEL.md</span> travels with it, for Claude Code, Cursor, Codex, Gemini CLI, and anything else that honors <span class="mono">AGENTS.md</span>. No plugin, no per-tool config to keep current.</p>
+    <ul class="bar">
+      <li><div><h4>One mechanism, not a matrix.</h4><span>Skip the per-tool setup table. The agent loads AGENTS.md or CLAUDE.md by default, and the one line above carries the loop with it. Tool config formats churn; a reference from the file they already read does not.</span></div></li>
+      <li><div><h4>Claude Code can pull it in whole.</h4><span>In CLAUDE.md, write <b>@FLYWHEEL.md</b> to import the entire file into context, not just a pointer to it.</span></div></li>
+      <li><div><h4>Want a gate to actually block? Wire it into CI.</h4><span>The reference makes the agent follow the loop. Your pipeline makes a gate binding. The file states the intent, CI enforces it.</span></div></li>
+    </ul>
   </div>
 </section>
 
@@ -424,6 +462,38 @@ Ship, verify, learn, improve. Each turn compounds.
     </ul>
   </div>
 </section>
+<section id="faq">
+  <div class="wrap">
+    <div class="kicker">FAQ</div>
+    <h2>The questions people actually ask.</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <h3>Does an agent read FLYWHEEL.md automatically?</h3>
+        <p>No. Tools load <b>AGENTS.md</b> or <b>CLAUDE.md</b>, not an arbitrary file in your repo. Reference FLYWHEEL.md from there with one line and it travels with them on every run. See <a href="#use" style="color:var(--accent-ink)">how agents load it</a>.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do I need all four stages?</h3>
+        <p>No. Ship, Verify, Learn, and Improve are the default. Split a stage, add one, remove one, or reorder to match how your project actually ships. The shape is yours; the discipline is the point.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is the process enforced?</h3>
+        <p>No. It's instructions an agent follows, like any other guidance, not hard enforcement. To make a gate actually block, wire the same rule into your CI. The file makes the intent explicit; your pipeline makes it binding.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What if it conflicts with AGENTS.md?</h3>
+        <p>They don't compete. <b>AGENTS.md</b> says what to do, <b>FLYWHEEL.md</b> says how to ship it. An explicit prompt from you overrides both.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How is this different from a definition-of-done checklist?</h3>
+        <p>A checklist is a one-time gate you pass or fail. A flywheel is a loop: <b>Learn</b> feeds the next turn, so each change starts smarter than the last. It compounds instead of resetting.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I update it later?</h3>
+        <p>Yes. Treat it as living documentation that lives in your repo, next to the code, in the loop. A doc that lives outside the loop rots.</p>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="finale">
   <div class="wrap">
     <div class="kicker">One honest note</div>
@@ -452,6 +522,14 @@ function copyFlywheel(){
   var txt=FLYWHEEL_SRC||(el?el.innerText:"");
   if(window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:'copy-v'+(window.__FW_V||1),title:'Copy FLYWHEEL.md (v'+(window.__FW_V||1)+')',event:true});}
   var done=function(){var b=document.getElementById('copybtn'); if(b){var o=b.textContent; b.textContent='Copied'; setTimeout(function(){b.textContent=o;},1800);}};
+  var fallback=function(){var t=document.createElement('textarea'); t.value=txt; t.style.position='fixed'; t.style.opacity='0'; document.body.appendChild(t); t.select(); try{document.execCommand('copy'); done();}catch(e){} document.body.removeChild(t);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,fallback);}else{fallback();}
+}
+function copyUse(){
+  var el=document.getElementById('use-src');
+  var txt=el?el.innerText:"";
+  if(window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:'copy-snippet',title:'Copy AGENTS.md snippet',event:true});}
+  var done=function(){var b=document.getElementById('copyuse'); if(b){var o=b.textContent; b.textContent='Copied'; setTimeout(function(){b.textContent=o;},1800);}};
   var fallback=function(){var t=document.createElement('textarea'); t.value=txt; t.style.position='fixed'; t.style.opacity='0'; document.body.appendChild(t); t.select(); try{document.execCommand('copy'); done();}catch(e){} document.body.removeChild(t);};
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,fallback);}else{fallback();}
 }

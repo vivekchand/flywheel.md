@@ -68,6 +68,17 @@ Per-stack starting points:
 - Frontend app: https://flywheel.md/examples/frontend-app.md
 - ML project: https://flywheel.md/examples/ml-project.md
 
+## How agents load it
+
+No coding tool reads a file named FLYWHEEL.md on its own. Tools load AGENTS.md (or their own CLAUDE.md, .cursor/rules, GEMINI.md). So you do not wire up a new file per tool. You point the file they already read at this one, with a single line:
+
+## Process
+Follow the loop in ./FLYWHEEL.md for every change.
+Don't mark a stage done without the evidence it requires.
+Stop at any gate marked (human) and wait for a person.
+
+Paste that into the context file your agent already loads. Because that file is auto-loaded, FLYWHEEL.md travels with it for Claude Code, Cursor, Codex, Gemini CLI, and anything else that honors AGENTS.md. This is one mechanism, not a per-tool config matrix that rots as tool formats change. Claude Code can also import the whole file by writing @FLYWHEEL.md in CLAUDE.md. To make a gate actually block, wire the same rule into CI: the file states the intent, the pipeline makes it binding.
+
 ## License
 
 MIT. The text is free to copy and adapt. No attribution needed.
