@@ -18,6 +18,12 @@ The loop has four default stages: Ship, Verify, Learn, Improve. Each stage names
 - [Frontend app](https://flywheel.md/examples/frontend-app.md): A FLYWHEEL.md for a user-facing web app.
 - [ML project](https://flywheel.md/examples/ml-project.md): A FLYWHEEL.md for a model, with evals as the evidence bar.
 
+## Adoption
+
+- No coding tool reads a file named FLYWHEEL.md on its own. Tools load AGENTS.md (or CLAUDE.md, .cursor/rules, GEMINI.md). To make FLYWHEEL.md default context, reference it from the file the agent already loads, with one line: "Follow the loop in ./FLYWHEEL.md for every change." Because that context file is auto-loaded, the loop travels with it for Claude Code, Cursor, Codex, and Gemini CLI. No plugin, no per-tool config matrix to keep current.
+- Claude Code can import the whole file by writing @FLYWHEEL.md in CLAUDE.md.
+- To make a gate actually block, wire the same rule into CI. The file states the intent; the pipeline makes it binding.
+
 ## Key ideas
 
 - The loop: Ship, Verify, Learn, Improve. Each turn compounds.
