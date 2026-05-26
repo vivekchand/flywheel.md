@@ -1,0 +1,27 @@
+# FLYWHEEL.md
+
+> FLYWHEEL.md is a single Markdown file you drop in your repo root, next to AGENTS.md, that defines the loop your AI coding agents follow to ship a change, prove it works in production, learn from it, and improve. Humans gate the steps that matter. AGENTS.md says what to do, SOUL.md says who to be, FLYWHEEL.md says how to ship and how to know you did.
+
+The loop has four default stages: Ship, Verify, Learn, Improve. Each stage names a "Done when" exit criterion and an optional human "Gate" where the agent stops and waits for a person before going on. The point is compounding momentum: what each turn learns feeds the next, so every turn ships faster and safer. The file is instructions an agent reads, not a runtime or a plugin. To make a gate binding, wire the same rule into CI.
+
+## Docs
+
+- [FLYWHEEL.md, the full spec](https://flywheel.md/FLYWHEEL.md): The complete file. The four stages with their Done-when and Gate lines, where humans stay in the loop, the bar that holds every turn, and how to adapt the stages to your project.
+- [README](https://flywheel.md/README.md): Short overview, the agent-file canon (AGENTS.md, SOUL.md, FLYWHEEL.md), and how to adopt it.
+- [Full text for LLMs](https://flywheel.md/llms-full.txt): Everything above expanded into one Markdown file.
+
+## Examples
+
+- [CLI tool](https://flywheel.md/examples/cli-tool.md): A FLYWHEEL.md tuned for a command-line tool.
+- [Library](https://flywheel.md/examples/library.md): A FLYWHEEL.md for a published package or SDK.
+- [Web service](https://flywheel.md/examples/web-service.md): A FLYWHEEL.md for a deployed backend service.
+- [Frontend app](https://flywheel.md/examples/frontend-app.md): A FLYWHEEL.md for a user-facing web app.
+- [ML project](https://flywheel.md/examples/ml-project.md): A FLYWHEEL.md for a model, with evals as the evidence bar.
+
+## Key ideas
+
+- The loop: Ship, Verify, Learn, Improve. Each turn compounds.
+- Done means deployed and verified, with evidence. A passing test is not proof.
+- Gates are where a human stays in control: risk and trust boundaries, irreversible changes, legal, product taste. Keep gates deterministic, written as code your CI runs.
+- A company without this loop is an open-loop control system that drifts at machine speed. The flywheel is the closed loop.
+- License: MIT. Copy it, fork it, make it yours. No attribution needed.
