@@ -13,6 +13,13 @@
 <meta name="twitter:title" content="FLYWHEEL.md: how agents ship" />
 <meta name="twitter:description" content="The process your AI coding agents follow to ship a change, prove it in production, and improve. Every time. One file in your repo, next to AGENTS.md." />
 <meta name="twitter:image" content="https://flywheel.md/og-card.png" />
+<link rel="canonical" href="https://flywheel.md/" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+<meta name="author" content="vivekchand" />
+<meta name="keywords" content="FLYWHEEL.md, AGENTS.md, SOUL.md, AI coding agents, agent workflow, ship verify learn improve, human in the loop, agentic coding, Claude Code, Cursor, Codex" />
+<!-- Markdown and LLM-friendly mirrors of this page, for AI crawlers and answer engines -->
+<link rel="alternate" type="text/markdown" title="FLYWHEEL.md (the spec)" href="/FLYWHEEL.md" />
+<link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -168,6 +175,89 @@
   .foot a{color:var(--muted)}.foot a:hover{color:var(--heading)}
   .foot .links a{margin-left:20px}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://flywheel.md/#website",
+      "url": "https://flywheel.md/",
+      "name": "FLYWHEEL.md",
+      "description": "The loop your AI coding agents follow to ship a change, prove it in production, and improve. One Markdown file in your repo, next to AGENTS.md.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://flywheel.md/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://flywheel.md/#person",
+      "name": "vivekchand",
+      "url": "https://github.com/vivekchand"
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://flywheel.md/#article",
+      "headline": "FLYWHEEL.md: the loop your AI coding agents follow to ship",
+      "name": "FLYWHEEL.md",
+      "description": "FLYWHEEL.md is a single Markdown file you drop in your repo root, next to AGENTS.md, that defines the loop your AI coding agents follow to ship a change, prove it works in production, learn, and improve, with humans gating the steps that matter.",
+      "inLanguage": "en",
+      "url": "https://flywheel.md/",
+      "mainEntityOfPage": "https://flywheel.md/",
+      "isPartOf": { "@id": "https://flywheel.md/#website" },
+      "author": { "@id": "https://flywheel.md/#person" },
+      "keywords": "FLYWHEEL.md, AGENTS.md, SOUL.md, AI coding agents, agentic coding, ship verify learn improve, human in the loop",
+      "articleSection": ["Ship", "Verify", "Learn", "Improve"],
+      "license": "https://opensource.org/licenses/MIT"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://flywheel.md/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is FLYWHEEL.md?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "FLYWHEEL.md is a single Markdown file you put in your repo root, next to AGENTS.md, that defines the loop your AI coding agents follow to ship a change, prove it works in production, learn from it, and improve. It is context the agent reads before it acts, not a runtime or plugin."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is FLYWHEEL.md different from AGENTS.md and SOUL.md?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They are the agent-file canon. AGENTS.md says what to do, the project's instructions. SOUL.md says who to be, the agent's identity. FLYWHEEL.md says how to ship, and how to know you did: the process a change runs every turn."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the stages in a flywheel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The four default stages are Ship, Verify, Learn, and Improve. Each stage names a Done-when exit criterion and an optional human Gate where the agent stops and waits for a person. You can split, add, remove, or reorder stages to match how your project ships."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does FLYWHEEL.md enforce the process?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It is instructions an agent follows, like any other guidance, not hard enforcement. To make a gate actually block, wire the same rule into your CI. The file makes the intent explicit; your pipeline makes it binding."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I adopt FLYWHEEL.md?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Copy the starter file into your repo root next to AGENTS.md, then rewrite the stages and gates for your project. Agents that read project Markdown, such as Claude Code, Cursor, or Codex, pick it up as instructions. It is MIT licensed, free to copy and fork, with no attribution needed."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
