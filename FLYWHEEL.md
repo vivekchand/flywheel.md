@@ -47,6 +47,7 @@ A few rules that do not change between stages, whatever stages you choose:
 - Every iteration costs money.
 - Know your data flow.
 - Fix the cause, never the symptom.
+- Start from the current base. Rebase onto the latest mainline right before you ship, not just when you branched. Work built on a stale base quietly reintroduces fixed bugs, and a green check on that base is telling you about a tree nobody is going to run.
 - Leave a trail, in the codebase, where it stays in the loop. A doc outside the loop rots.
 - Audit the loop itself. Processes pile up and nobody deletes them; every few turns, ask of each stage and gate whether it still earns its place, and cut what does not.
 
